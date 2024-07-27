@@ -7,7 +7,7 @@ import { IShopContext, ShopContext } from "../context/shop-contex";
 export const Navbar = () => {
   const { availableMoney, isAuthenticated, setIsAuthenticated } =
     useContext<IShopContext>(ShopContext);
-  
+  const username = localStorage.getItem("username")
   const logout = () => {
   
     setIsAuthenticated(false)
@@ -29,6 +29,7 @@ export const Navbar = () => {
               Logout
             </Link>
             <span> ${availableMoney.toFixed(2)} </span>
+            <span> Hi {username}  </span>
           </>
         )}
       </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import useGetProducts from "../../hooks/useGetProducts";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { IProduct } from "../../models/interfaces";
@@ -12,6 +12,7 @@ const CheckoutPage = () => {
   const { products } = useGetProducts();
   const navigate = useNavigate();
   const totalAmount = getTotalCartAmount();
+
   return (
     <div className="cart">
       <div>
@@ -20,7 +21,7 @@ const CheckoutPage = () => {
       <div className="cart">
         {products.map((product: IProduct) => {
           if (getCartItemCount(product._id) !== 0)
-            return <CartItem product={product} />;
+            return <CartItem product={product} key={product.productName} />;
         })}
       </div>
       {totalAmount > 0 ? (

@@ -66,7 +66,7 @@ const Register = () => {
 const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [_, setCookies] = useCookies(["access_token"]);
+  const [ _ , setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
 
   const { setIsAuthenticated } =
@@ -81,6 +81,7 @@ const Login = () => {
       });
       setCookies("access_token", result.data.token);
       window.localStorage.setItem("userID", result.data.userID);
+      window.localStorage.setItem("username", username);
       setIsAuthenticated(true);
       navigate("/");
     } catch (err) {

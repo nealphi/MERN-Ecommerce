@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { InferencePriority } from "typescript";
 
 export interface IProduct {
   productName: string;

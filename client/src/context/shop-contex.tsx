@@ -10,10 +10,12 @@ export interface IShopContext {
   addToCart: (itemId: string) => void;
   removeFromCart: (itemId: string) => void;
   updateCartItemCount: (newAmount: number, itemId: string) => void;
+  getCartItems: () => void;
   getCartItemCount: (itemId: string) => number;
   getTotalCartAmount: () => number;
   checkout: () => void;
   availableMoney: number;
+  fetchAvailableMoney: () => void;
   purchasedItems: IProduct[];
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthentcated: boolean) => void;
@@ -23,10 +25,12 @@ const defaultVal: IShopContext = {
   addToCart: () => null,
   removeFromCart: () => null,
   updateCartItemCount: () => null,
+  getCartItems: () => null,
   getCartItemCount: () => 0,
   getTotalCartAmount: () => 0,
   checkout: () => null,
   availableMoney: 0,
+  fetchAvailableMoney: () => null,
   purchasedItems: [],
   isAuthenticated: false,
   setIsAuthenticated: () => null,
@@ -36,7 +40,9 @@ export const ShopContext = createContext<IShopContext>(defaultVal);
 
 export const ShopContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [cartItems, setCartItems] = useState<{ string: number } | {}>({});
+  const [cartItems, setCartItems] = useState<{ [key: string]: number } | {}>(
+    {}
+  );
   const [availableMoney, setAvailableMoney] = useState<number>(0);
   const [purchasedItems, setPurchasedItems] = useState<IProduct[]>([]);
   const { products, fetchProducts } = useGetProducts();
@@ -56,7 +62,7 @@ export const ShopContextProvider = (props) => {
       );
       setAvailableMoney(res.data.availableMoney);
     } catch (err) {
-      alert("ERROR: Something went wrong!");
+      alert("ERROR: Something went wrooong!");
     }
   };
   const fetchPurchasedItems = async () => {
@@ -74,29 +80,108 @@ export const ShopContextProvider = (props) => {
   };
 
   const getCartItemCount = (itemId: string): number => {
-    if (itemId in cartItems) {
+    if (cartItems && itemId in cartItems) {
       return cartItems[itemId];
     }
     return 0;
   };
-  const addToCart = (itemId: string) => {
-    if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-    } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+
+  
+
+  const addToCart = async (itemId: string) => {
+    setCartItems((prev) => {
+      const updatedCartItems = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
+      const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
+      
+      // Make sure to use updatedCartItems here
+      axios.post("http://localhost:3001/product/cart/edit", body, { headers })
+        .catch(error => console.error("Error adding to cart", error));
+      
+      return updatedCartItems;
+    });
+  };
+  
+  const removeFromCart = async (itemId: string) => {
+    setCartItems((prev) => {
+      if (!prev[itemId]) return prev;
+      const updatedCartItems = { ...prev, [itemId]: prev[itemId] - 1 };
+      const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
+        axios.post("http://localhost:3001/product/cart/edit", body, { headers })
+        .catch(error => console.error("Error removing from cart", error));
+      return updatedCartItems;
+    });
+  };
+  const updateCartItemCount = async (newAmount: number, itemId: string) => {
+    if (newAmount < 0) return;
+  
+    setCartItems((prev) => {
+      const updatedCartItems = { ...prev, [itemId]: newAmount };
+      const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
+  
+      // Make sure to use updatedCartItems in the API call
+      axios.post("http://localhost:3001/product/cart/edit", body, { headers })
+        .catch(error => console.error("Error updating cart item count", error));
+  
+      return updatedCartItems;
+    });
+  };
+
+  const getCartItems = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/product/cart/${localStorage.getItem("userID")}`,  { headers }
+      );
+      if (response.data.success) {
+        setCartItems(response.data.cartItems); // Update your state with retrieved cart items
+      }
+    } catch (error) {
+      console.error("Error getting cart items", error);
     }
   };
 
-  const removeFromCart = (itemId: string) => {
-    if (!cartItems[itemId]) return;
-    if (cartItems[itemId] === 0) return;
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
 
-  const updateCartItemCount = (newAmount: number, itemId: string) => {
-    if (newAmount < 0) return;
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
-  };
+  // const addToCart = async (itemId: string) => {
+  //   if (!cartItems[itemId]) {
+  //     setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+  //   } else {
+  //     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  //   }
+
+  //   const body = { customerID: localStorage.getItem("userID"), cartItems };
+
+  //   try {
+  //     await axios.post("http://localhost:3001/product/cart/edit", body,  { headers });
+  //   } catch (error) {
+  //     console.error("Error adding to cart", error);
+  //   }
+  // };
+
+ 
+  // const removeFromCart = async (itemId: string) => {
+  //   if (!cartItems[itemId]) return;
+  //   if (cartItems[itemId] === 0) return;
+  //   setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+
+  //   const body = { customerID: localStorage.getItem("userID"), cartItems };
+
+  //   try {
+  //     await axios.post("http://localhost:3001/product/cart/edit", body , { headers });
+  //   } catch (error) {
+  //     console.error("Error adding to cart", error);
+  //   }
+  // };
+
+  // const updateCartItemCount = async (newAmount: number, itemId: string) => {
+  //   if (newAmount < 0) return;
+  //   setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
+  //   const body = { customerID: localStorage.getItem("userID"), cartItems };
+
+  //   try {
+  //     await axios.post("http://localhost:3001/product/cart/edit", body,  { headers });
+  //   } catch (error) {
+  //     console.error("Error adding to cart", error);
+  //   }
+  // };
 
   const getTotalCartAmount = () => {
     if (products.length === 0) return 0;
@@ -128,11 +213,15 @@ export const ShopContextProvider = (props) => {
       console.log(err);
     }
   };
+  useEffect(()=> {
+console.log("cartItems", cartItems)
+  }, [cartItems])
 
   useEffect(() => {
     if (isAuthenticated) {
       fetchAvailableMoney();
       fetchPurchasedItems();
+      getCartItems();
     }
   }, [isAuthenticated]);
 
@@ -147,10 +236,12 @@ export const ShopContextProvider = (props) => {
     addToCart,
     removeFromCart,
     updateCartItemCount,
+    getCartItems,
     getCartItemCount,
     getTotalCartAmount,
     checkout,
     availableMoney,
+    fetchAvailableMoney,
     purchasedItems,
     isAuthenticated,
     setIsAuthenticated,

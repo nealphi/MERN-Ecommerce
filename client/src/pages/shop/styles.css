@@ -2,9 +2,8 @@
     margin-top: 100px;
     width: 100%;
     height: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
+    display: flex;
+    flex-wrap: wrap;
   }
   
   .product {

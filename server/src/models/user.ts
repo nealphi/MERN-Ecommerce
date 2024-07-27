@@ -6,6 +6,7 @@ export interface IUser {
   password: string;
   availableMoney: number;
   purchasedItems: string[];
+  cartItems: { [key: string]: number };  
 }
 
 const UserSchema = new Schema<IUser>({
@@ -15,6 +16,12 @@ const UserSchema = new Schema<IUser>({
   purchasedItems: [
     { type: Schema.Types.ObjectId, ref: "product", default: [] },
   ],
+  cartItems: {
+    type: Map,
+    of: Number,
+    default: {}
+  }
 });
+
 
 export const UserModel = model<IUser>("user", UserSchema);
