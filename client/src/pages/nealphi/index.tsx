@@ -13,7 +13,7 @@ import YoutubeEmbed from "../../components/YoutubeEmbed";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
 import YouTubeVideos from "/Users/negin/Desktop/MERN-eCommerce/client/src/YouTubeVideos.json";
-import Images from "/Users/negin/Desktop/MERN-eCommerce/client/src/ImageSrc.json";
+import imageSrc from "/Users/negin/Desktop/MERN-eCommerce/client/src/imageSrc.json";
 import VideoComponent from "../../components/Video";
 const NealphiPage = () => {
   const { selectedTab, setSelectedTab, isAuthenticated } =
@@ -112,7 +112,7 @@ const NealphiPage = () => {
             lg: "repeat(4, 1fr)",
           }}
         >
-          {Images.map((image) => (
+          {imageSrc.map((image) => (
             <GridItem p={2}>
               <Image src={image.src} />
             </GridItem>
