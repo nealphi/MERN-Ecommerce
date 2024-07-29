@@ -6,8 +6,13 @@ import { productRouter } from "./routes/product";
 
 const app = express();
 
+app.use(cors({
+  origin: ["https://mern-ecommerce-server-flax.vercel.app"],
+  methods: ["POST","GET"],
+  credentials: true
+}))
+
 app.use(express.json());
-app.use(cors());
 
 app.use("/user", userRouter);
 app.use("/product", productRouter);
