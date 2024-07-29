@@ -19,6 +19,8 @@ export interface IShopContext {
   purchasedItems: IProduct[];
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthentcated: boolean) => void;
+  selectedTab: string;
+  setSelectedTab: (selectedTab: string) => void;
 }
 
 const defaultVal: IShopContext = {
@@ -34,6 +36,8 @@ const defaultVal: IShopContext = {
   purchasedItems: [],
   isAuthenticated: false,
   setIsAuthenticated: () => null,
+  selectedTab: "top",
+  setSelectedTab: () => null,
 };
 
 export const ShopContext = createContext<IShopContext>(defaultVal);
@@ -51,6 +55,7 @@ export const ShopContextProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     cookies.access_token !== null
   );
+  const[selectedTab, setSelectedTab] = useState<string>("top")
 
   const fetchAvailableMoney = async () => {
     try {
@@ -62,7 +67,7 @@ export const ShopContextProvider = (props) => {
       );
       setAvailableMoney(res.data.availableMoney);
     } catch (err) {
-      alert("ERROR: Something went wrooong!");
+      alert("ERROR: fetchAvailableMoney");
     }
   };
   const fetchPurchasedItems = async () => {
@@ -75,7 +80,7 @@ export const ShopContextProvider = (props) => {
       );
       setPurchasedItems(res.data.purchasedItems);
     } catch (err) {
-      alert("ERROR: Something went wrong!");
+      alert("ERROR: fetchPurchasedItems!");
     }
   };
 
@@ -140,49 +145,6 @@ export const ShopContextProvider = (props) => {
   };
 
 
-  // const addToCart = async (itemId: string) => {
-  //   if (!cartItems[itemId]) {
-  //     setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-  //   } else {
-  //     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  //   }
-
-  //   const body = { customerID: localStorage.getItem("userID"), cartItems };
-
-  //   try {
-  //     await axios.post("http://localhost:3001/product/cart/edit", body,  { headers });
-  //   } catch (error) {
-  //     console.error("Error adding to cart", error);
-  //   }
-  // };
-
- 
-  // const removeFromCart = async (itemId: string) => {
-  //   if (!cartItems[itemId]) return;
-  //   if (cartItems[itemId] === 0) return;
-  //   setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-
-  //   const body = { customerID: localStorage.getItem("userID"), cartItems };
-
-  //   try {
-  //     await axios.post("http://localhost:3001/product/cart/edit", body , { headers });
-  //   } catch (error) {
-  //     console.error("Error adding to cart", error);
-  //   }
-  // };
-
-  // const updateCartItemCount = async (newAmount: number, itemId: string) => {
-  //   if (newAmount < 0) return;
-  //   setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
-  //   const body = { customerID: localStorage.getItem("userID"), cartItems };
-
-  //   try {
-  //     await axios.post("http://localhost:3001/product/cart/edit", body,  { headers });
-  //   } catch (error) {
-  //     console.error("Error adding to cart", error);
-  //   }
-  // };
-
   const getTotalCartAmount = () => {
     if (products.length === 0) return 0;
 
@@ -213,9 +175,7 @@ export const ShopContextProvider = (props) => {
       console.log(err);
     }
   };
-  useEffect(()=> {
-console.log("cartItems", cartItems)
-  }, [cartItems])
+
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -232,6 +192,7 @@ console.log("cartItems", cartItems)
     }
   }, [isAuthenticated]);
 
+
   const contextValue: IShopContext = {
     addToCart,
     removeFromCart,
@@ -245,6 +206,8 @@ console.log("cartItems", cartItems)
     purchasedItems,
     isAuthenticated,
     setIsAuthenticated,
+    selectedTab,
+    setSelectedTab,
   };
 
   return (

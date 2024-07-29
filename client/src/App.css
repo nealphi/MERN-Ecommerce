@@ -1,37 +1,39 @@
+*{
+  box-sizing: border-box;
+}
+
+
+
 .App {
-  text-align: center;
+ display: flex;
+ flex-direction: column;
+ background-color: rgb(134, 134, 134);
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  overflow-x: hidden;
 }
 
 .navbar {
-  display: flex;
+  height: 80px;
+  font-size: 18px;
+  font-weight: bold;
+  position: sticky;
+  top: 0;  
+  z-index: 100;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(19, 19, 19);
+  background-color: rgb(134, 174, 173);
   color: white;
-  padding: 10px;
+  padding: 20px;
 }
 
-.navbarLinks {
-  display: flex;
-  margin-right: 20px;
+
+.video {
+  width: 100%;
+  min-width: 350px;
 }
 
-.navbarLinks span {
-  margin: 0px;
-  padding: 0px;
-  display: flex;
-  align-items: center;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-  margin-right: 20px;
-}

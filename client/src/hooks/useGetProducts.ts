@@ -18,7 +18,7 @@ const useGetProducts = () => {
       const fetchedProducts = await axios.get("http://localhost:3001/product", {headers});
       setProducts(fetchedProducts.data.products);
     } catch (err) {
-      alert("ERROR: Something went WRONG!");
+      alert("ERROR: fetchProducts!");
     }
   };
 
