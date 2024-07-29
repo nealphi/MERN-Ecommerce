@@ -13,9 +13,18 @@ import YoutubeEmbed from "../../components/YoutubeEmbed";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
 import YouTubeVideos from "/Users/negin/Desktop/MERN-eCommerce/client/src/YouTubeVideos.json";
-import imageSrc from "/Users/negin/Desktop/MERN-eCommerce/client/src/imageSrc.json";
 import VideoComponent from "../../components/Video";
 const NealphiPage = () => {
+  const imageSrc = [
+    { "src" :"../1.jpeg"},
+    { "src" :"../2.jpeg"},
+    { "src" :"../3.jpeg"},
+    { "src" :"../4.jpeg"},
+    { "src" :"../5.jpeg"},
+    { "src" :"../6.jpeg"},
+    { "src" :"../7.jpeg"},
+    { "src" :"../8.jpeg"}
+   ]
   const { selectedTab, setSelectedTab, isAuthenticated } =
     useContext<IShopContext>(ShopContext);
   const topRef = useRef(null);
