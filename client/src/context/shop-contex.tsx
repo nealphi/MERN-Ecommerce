@@ -23,24 +23,24 @@ export interface IShopContext {
   setSelectedTab: (selectedTab: string) => void;
 }
 
-const defaultVal: IShopContext = {
-  addToCart: () => null,
-  removeFromCart: () => null,
-  updateCartItemCount: () => null,
-  getCartItems: () => null,
-  getCartItemCount: () => 0,
-  getTotalCartAmount: () => 0,
-  checkout: () => null,
-  availableMoney: 0,
-  fetchAvailableMoney: () => null,
-  purchasedItems: [],
-  isAuthenticated: false,
-  setIsAuthenticated: () => null,
-  selectedTab: "top",
-  setSelectedTab: () => null,
-};
+// const defaultVal: IShopContext = {
+//   addToCart: () => null,
+//   removeFromCart: () => null,
+//   updateCartItemCount: () => null,
+//   getCartItems: () => null,
+//   getCartItemCount: () => 0,
+//   getTotalCartAmount: () => 0,
+//   checkout: () => null,
+//   availableMoney: 0,
+//   fetchAvailableMoney: () => null,
+//   purchasedItems: [],
+//   isAuthenticated: false,
+//   setIsAuthenticated: () => null,
+//   selectedTab: "top",
+//   setSelectedTab: () => null,
+// };
 
-export const ShopContext = createContext<IShopContext>(defaultVal);
+export const ShopContext = createContext<IShopContext | null>(null);
 
 export const ShopContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
@@ -60,20 +60,19 @@ export const ShopContextProvider = (props) => {
   const fetchAvailableMoney = async () => {
     try {
       const res = await axios.get(
-        `/user/available-money/${localStorage.getItem(
+        `https://nealphi-server.vercel.app/user/available-money/${localStorage.getItem(
           "userID"
         )}`,
         { headers }
       );
       setAvailableMoney(res.data.availableMoney);
     } catch (err) {
-      alert("ERROR: fetchAvailableMoney");
-    }
+      console.error("No");    }
   };
   const fetchPurchasedItems = async () => {
     try {
       const res = await axios.get(
-        `/product/purchased-items/${localStorage.getItem(
+        `https://nealphi-server.vercel.app/product/purchased-items/${localStorage.getItem(
           "userID"
         )}`,
         { headers }
