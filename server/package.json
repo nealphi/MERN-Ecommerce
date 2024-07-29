@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./build/index.js",
-    "build": "tsc build --output public",
+    "build": "tsc --outDir dist",
     "dev": "nodemon ./src/index.ts"
   },
   "dependencies": {
