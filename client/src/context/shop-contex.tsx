@@ -99,7 +99,7 @@ export const ShopContextProvider = (props) => {
       const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
       
       // Make sure to use updatedCartItems here
-      axios.post("/product/cart/edit", body, { headers })
+      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers })
         .catch(error => console.error("Error adding to cart", error));
       
       return updatedCartItems;
@@ -111,7 +111,7 @@ export const ShopContextProvider = (props) => {
       if (!prev[itemId]) return prev;
       const updatedCartItems = { ...prev, [itemId]: prev[itemId] - 1 };
       const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
-        axios.post("/product/cart/edit", body, { headers })
+        axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers })
         .catch(error => console.error("Error removing from cart", error));
       return updatedCartItems;
     });
@@ -124,7 +124,7 @@ export const ShopContextProvider = (props) => {
       const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
   
       // Make sure to use updatedCartItems in the API call
-      axios.post("/product/cart/edit", body, { headers })
+      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers })
         .catch(error => console.error("Error updating cart item count", error));
   
       return updatedCartItems;
@@ -134,7 +134,7 @@ export const ShopContextProvider = (props) => {
   const getCartItems = async () => {
     try {
       const response = await axios.get(
-        `/product/cart/${localStorage.getItem("userID")}`,  { headers }
+        `https://nealphi-server.vercel.app/product/cart/${localStorage.getItem("userID")}`,  { headers }
       );
       if (response.data.success) {
         setCartItems(response.data.cartItems); // Update your state with retrieved cart items
@@ -163,7 +163,7 @@ export const ShopContextProvider = (props) => {
   const checkout = async () => {
     const body = { customerID: localStorage.getItem("userID"), cartItems };
     try {
-      await axios.post("/product/checkout", body, {
+      await axios.post("https://nealphi-server.vercel.app/product/checkout", body, {
         headers,
       });
       setCartItems({});

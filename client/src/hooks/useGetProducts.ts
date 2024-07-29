@@ -15,7 +15,7 @@ const useGetProducts = () => {
  
   const fetchProducts = async () => {
     try {
-      const fetchedProducts = await axios.get("http://localhost:3001/product", {headers});
+      const fetchedProducts = await axios.get("https://nealphi-server.vercel.app/product", {headers});
       setProducts(fetchedProducts.data.products);
     } catch (err) {
       alert("ERROR: fetchProducts!");

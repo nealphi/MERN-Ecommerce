@@ -21,7 +21,7 @@ const Register = () => {
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("/user/register", {
+      await axios.post("https://nealphi-server.vercel.app/user/register", {
         username,
         password,
       });
@@ -75,7 +75,7 @@ const Login = () => {
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      const result = await axios.post("/user/login", {
+      const result = await axios.post("https://nealphi-server.vercel.app/user/login", {
         username,
         password,
       });
