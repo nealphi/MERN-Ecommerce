@@ -3,14 +3,17 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { userRouter } from "./routes/user";
 import { productRouter } from "./routes/product";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors({
-  origin: ["https://nealphi-server.vercel.app/"],
-  methods: ["POST","GET"],
+  origin: ["https://your-client-app.vercel.app"],
+  methods: ["POST", "GET"],
   credentials: true
-}))
+}));
 
 app.use(express.json());
 
@@ -21,7 +24,8 @@ app.get("/hello", (req, res) => {
 });
 
 mongoose.connect(
-  "mongodb+srv://neginalipanahi:N1e-g2i%2Fn1368@ecommerce.v1fle7p.mongodb.net/ecommerce"
+  process.env.MONGODB_URI || "your-default-mongodb-uri"
 );
 
-app.listen(3001, () => console.log("Server started"));
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Server started on port ${port}`));
