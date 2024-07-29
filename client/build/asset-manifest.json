@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c2522a15.css",
+    "main.js": "/static/js/main.ed354905.js",
+    "static/media/cinzel-latin-wght-normal.woff2": "/static/media/cinzel-latin-wght-normal.aee96ba28632614d5268.woff2",
+    "static/media/cinzel-latin-ext-wght-normal.woff2": "/static/media/cinzel-latin-ext-wght-normal.92e2b3cb90332908e3e8.woff2",
+    "index.html": "/index.html",
+    "main.c2522a15.css.map": "/static/css/main.c2522a15.css.map",
+    "main.ed354905.js.map": "/static/js/main.ed354905.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c2522a15.css",
+    "static/js/main.ed354905.js"
+  ]
+}

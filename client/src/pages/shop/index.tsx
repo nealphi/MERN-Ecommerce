@@ -5,9 +5,7 @@ import useGetProducts from "../../hooks/useGetProducts";
 import { useContext } from "react";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { Navigate } from "react-router-dom";
-import YoutubeEmbed from "../../components/YoutubeEmbed";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import products from '/Users/negin/Desktop/MERN-eCommerce/client/public/product.json'
 const ShopPage = () => {
   const { products } = useGetProducts();
   const { isAuthenticated } = useContext<IShopContext>(ShopContext)
