@@ -9,10 +9,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useRef } from "react";
-import YoutubeEmbed from "../../components/YoutubeEmbed";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
-import YouTubeVideos from "/Users/negin/Desktop/MERN-eCommerce/client/src/YouTubeVideos.json";
 import VideoComponent from "../../components/Video";
 const NealphiPage = () => {
   const imageSrc = [
