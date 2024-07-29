@@ -6,17 +6,17 @@ import { productRouter } from "./routes/product";
 
 const app = express();
 
-// app.use(cors({
-//   origin: ["https://mern-ecommerce-server-qt50yunnr-nealphis-projects.vercel.app"],
-//   methods: ["POST","GET"],
-//   credentials: true
-// }))
+app.use(cors({
+  origin: ["https://mern-ecommerce-server-qt50yunnr-nealphis-projects.vercel.app"],
+  methods: ["POST","GET"],
+  credentials: true
+}))
 
 app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/product", productRouter);
-app.get("/", (req, res) => {
+app.get("/hello", (req, res) => {
   res.json("hello");
 });
 
