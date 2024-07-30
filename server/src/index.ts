@@ -1,29 +1,29 @@
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 import mongoose from "mongoose";
 import { userRouter } from "./routes/user";
 import { productRouter } from "./routes/product";
-import dotenv from "dotenv";
 
-
+const cors = require('cors');
 
 const app = express();
 
 
-// const corsOptions = {
-//   origin: "http://localhost:3000/",
-//   methods: ['POST', 'GET'],
-//   credentials: true 
-// };
+// Use CORS middleware
+app.use(cors({
+  origin: 'https://mern-ecommerce-client-ecru.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
-const corsOptions = {
-  origin: '*', // Allows all origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allows specific HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Allows specific headers
-};
+// Handle preflight requests
+app.options('*', cors({
+  origin: 'https://mern-ecommerce-client-ecru.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 app.use(express.json());
-app.use(cors(corsOptions));
 
 
 
@@ -33,8 +33,9 @@ app.get("/hello", (req, res) => {
   res.json("hello");
 });
 
-mongoose.connect("mongodb+srv://neginalipanahi:N1e-g2i%2Fn1368@ecommerce.v1fle7p.mongodb.net/ecommerce");
-
+mongoose.connect('mongodb+srv://neginalipanahi:N1e-g2i%2Fn1368@ecommerce.v1fle7p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce')
+.then(() => console.log('MongoDB connected'))
+.catch((err) => console.log(err));
 app.listen( 3001, () => {
   console.log("server started");
 });
