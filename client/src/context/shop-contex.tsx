@@ -67,7 +67,7 @@ export const ShopContextProvider = (props) => {
       );
       setAvailableMoney(res.data.availableMoney);
     } catch (err) {
-      alert("ERROR: fetchPurchasedItems!");
+      console.log("ERROR: fetchPurchasedItems!");
     }
   };
   const fetchPurchasedItems = async () => {
@@ -80,7 +80,7 @@ export const ShopContextProvider = (props) => {
       );
       setPurchasedItems(res.data.purchasedItems);
     } catch (err) {
-      alert("ERROR: fetchPurchasedItems!");
+      console.log("ERROR: fetchPurchasedItems!");
     }
   };
 

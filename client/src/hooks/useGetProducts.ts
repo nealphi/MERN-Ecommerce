@@ -21,7 +21,7 @@ const useGetProducts = () => {
       });
       setProducts(fetchedProducts.data.products);
     } catch (err) {
-      alert("ERROR: fetchProducts!");
+      console.log("ERROR: fetchProducts!");
     }
   };
   
