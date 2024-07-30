@@ -27,6 +27,7 @@ const useGetProducts = () => {
     fetchProducts();
   }, [isAuthenticated]);
 
+
   useEffect(() => {
     if (!isAuthenticated) {
       localStorage.clear();

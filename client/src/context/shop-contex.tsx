@@ -67,7 +67,8 @@ export const ShopContextProvider = (props) => {
       );
       setAvailableMoney(res.data.availableMoney);
     } catch (err) {
-      console.error("No");    }
+      alert("ERROR: fetchAvailableMoney");
+    }
   };
   const fetchPurchasedItems = async () => {
     try {
