@@ -12,10 +12,11 @@ const useGetProducts = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     cookies.access_token !== null
   );
- 
+  const api = "https://nealphi-server.vercel.app/"
+
   const fetchProducts = async () => {
     try {
-      const fetchedProducts = await axios.get("http://localhost:3001/product", {
+      const fetchedProducts = await axios.get(`${api}/product`, {
         headers,
       });
       setProducts(fetchedProducts.data.products);

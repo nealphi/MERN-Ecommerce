@@ -17,11 +17,11 @@ const AuthPage = () => {
 const Register = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const api = "https://nealphi-server.vercel.app/"
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/user/register", {
+      await axios.post(`${api}/user/register`, {
         username,
         password,
       });
@@ -70,11 +70,12 @@ const Login = () => {
   const navigate = useNavigate();
   const { setIsAuthenticated } =
     useContext<IShopContext>(ShopContext);
+    const api = "https://nealphi-server.vercel.app/"
 
-  const handleSubmit = async (event: SyntheticEvent) => {
+    const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      const result = await axios.post("http://localhost:3001/user/login", {
+      const result = await axios.post(`${api}/user/login`, {
         username,
         password,
       });
