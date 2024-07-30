@@ -12,7 +12,7 @@ const useGetProducts = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     cookies.access_token !== null
   );
-  const api = "http://localhost:3001"
+  const api = "https://nealphi-ecommerce-server.vercel.app"
 
   const fetchProducts = async () => {
     try {

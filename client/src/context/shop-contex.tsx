@@ -56,7 +56,7 @@ export const ShopContextProvider = (props) => {
     cookies.access_token !== null
   );
   const [selectedTab, setSelectedTab] = useState<string>("top");
-  const api = "nealphi-ecommerce-server.vercel.app"
+  const api = "https://nealphi-ecommerce-server.vercel.app"
   
   const fetchAvailableMoney = async () => {
     try {
