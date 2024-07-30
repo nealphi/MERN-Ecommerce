@@ -15,9 +15,8 @@ const useGetProducts = () => {
  
   const fetchProducts = async () => {
     try {
-      const fetchedProducts = await axios.get("/product", {
+      const fetchedProducts = await axios.get("http://localhost:3001/product", {
         headers,
-        withCredentials: true, // Include credentials in the request
       });
       setProducts(fetchedProducts.data.products);
     } catch (err) {

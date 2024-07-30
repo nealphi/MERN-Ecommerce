@@ -23,24 +23,24 @@ export interface IShopContext {
   setSelectedTab: (selectedTab: string) => void;
 }
 
-// const defaultVal: IShopContext = {
-//   addToCart: () => null,
-//   removeFromCart: () => null,
-//   updateCartItemCount: () => null,
-//   getCartItems: () => null,
-//   getCartItemCount: () => 0,
-//   getTotalCartAmount: () => 0,
-//   checkout: () => null,
-//   availableMoney: 0,
-//   fetchAvailableMoney: () => null,
-//   purchasedItems: [],
-//   isAuthenticated: false,
-//   setIsAuthenticated: () => null,
-//   selectedTab: "top",
-//   setSelectedTab: () => null,
-// };
+const defaultVal: IShopContext = {
+  addToCart: () => null,
+  removeFromCart: () => null,
+  updateCartItemCount: () => null,
+  getCartItems: () => null,
+  getCartItemCount: () => 0,
+  getTotalCartAmount: () => 0,
+  checkout: () => null,
+  availableMoney: 0,
+  fetchAvailableMoney: () => null,
+  purchasedItems: [],
+  isAuthenticated: false,
+  setIsAuthenticated: () => null,
+  selectedTab: "top",
+  setSelectedTab: () => null,
+};
 
-export const ShopContext = createContext<IShopContext | null>(null);
+export const ShopContext = createContext<IShopContext>(defaultVal);
 
 export const ShopContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
@@ -56,11 +56,12 @@ export const ShopContextProvider = (props) => {
     cookies.access_token !== null
   );
   const [selectedTab, setSelectedTab] = useState<string>("top");
-  axios.defaults.withCredentials = true;
+  const api = "http://localhost:3001"
+  
   const fetchAvailableMoney = async () => {
     try {
       const res = await axios.get(
-        `/user/available-money/${localStorage.getItem(
+        `${api}/user/available-money/${localStorage.getItem(
           "userID"
         )}`,
         { headers }
@@ -73,7 +74,7 @@ export const ShopContextProvider = (props) => {
   const fetchPurchasedItems = async () => {
     try {
       const res = await axios.get(
-        `/product/purchased-items/${localStorage.getItem(
+        `${api}/product/purchased-items/${localStorage.getItem(
           "userID"
         )}`,
         { headers }
@@ -101,7 +102,7 @@ export const ShopContextProvider = (props) => {
 
       // Make sure to use updatedCartItems here
       axios
-        .post("/product/cart/edit", body, {
+        .post(`${api}/product/cart/edit`, body, {
           headers,
         })
         .catch((error) => console.error("Error adding to cart", error));
@@ -119,7 +120,7 @@ export const ShopContextProvider = (props) => {
         cartItems: updatedCartItems,
       };
       axios
-        .post("/product/cart/edit", body, {
+        .post(`${api}/product/cart/edit`, body, {
           headers,
         })
         .catch((error) => console.error("Error removing from cart", error));
@@ -138,7 +139,7 @@ export const ShopContextProvider = (props) => {
 
       // Make sure to use updatedCartItems in the API call
       axios
-        .post("/product/cart/edit", body, {
+        .post(`${api}/product/cart/edit`, body, {
           headers,
         })
         .catch((error) =>
@@ -152,7 +153,7 @@ export const ShopContextProvider = (props) => {
   const getCartItems = async () => {
     try {
       const response = await axios.get(
-        `/product/cart/${localStorage.getItem(
+        `${api}/product/cart/${localStorage.getItem(
           "userID"
         )}`,
         { headers }
@@ -184,7 +185,7 @@ export const ShopContextProvider = (props) => {
     const body = { customerID: localStorage.getItem("userID"), cartItems };
     try {
       await axios.post(
-        "/product/checkout",
+        `${api}/product/checkout`,
         body,
         {
           headers,

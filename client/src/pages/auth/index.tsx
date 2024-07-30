@@ -15,14 +15,13 @@ const AuthPage = () => {
 };
 
 const Register = () => {
-  axios.defaults.withCredentials = true;
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("/user/register", {
+      await axios.post("http://localhost:3001/user/register", {
         username,
         password,
       });
@@ -65,22 +64,21 @@ const Register = () => {
 };
 
 const Login = () => {
-  axios.defaults.withCredentials = true;
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [ _ , setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
   const { setIsAuthenticated } =
     useContext<IShopContext>(ShopContext);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      const result = await axios.post("/user/login", {
+      const result = await axios.post("http://localhost:3001/user/login", {
         username,
         password,
       });
+      
       setCookies("access_token", result.data.token);
       window.localStorage.setItem("userID", result.data.userID);
       window.localStorage.setItem("username", username);
