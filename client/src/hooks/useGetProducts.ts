@@ -17,7 +17,7 @@ const useGetProducts = () => {
   const fetchProducts = async () => {
     try {
       const fetchedProducts = await axios.get(`${api}/product`, {
-        headers,
+        headers 
       });
       setProducts(fetchedProducts.data.products);
     } catch (err) {

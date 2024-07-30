@@ -24,6 +24,8 @@ const Register = () => {
       await axios.post(`${api}/user/register`, {
         username,
         password,
+      } , {
+        withCredentials: true
       });
       alert("registration completed! Now login!");
     } catch (err) {
@@ -78,6 +80,8 @@ const Login = () => {
       const result = await axios.post(`${api}/user/login`, {
         username,
         password,
+      }, {
+        withCredentials: true
       });
       
       setCookies("access_token", result.data.token);
