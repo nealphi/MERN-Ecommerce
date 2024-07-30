@@ -16,9 +16,14 @@ const app = express();
 //   credentials: true 
 // };
 
+const corsOptions = {
+  origin: '*', // Allows all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allows specific HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allows specific headers
+};
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 
 
