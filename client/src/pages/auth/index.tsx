@@ -15,6 +15,7 @@ const AuthPage = () => {
 };
 
 const Register = () => {
+  axios.defaults.withCredentials = true;
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -64,6 +65,7 @@ const Register = () => {
 };
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [ _ , setCookies] = useCookies(["access_token"]);
