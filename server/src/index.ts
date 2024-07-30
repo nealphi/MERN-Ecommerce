@@ -5,14 +5,13 @@ import { userRouter } from "./routes/user";
 import { productRouter } from "./routes/product";
 import dotenv from "dotenv";
 
-dotenv.config(); // Load environment variables
 
 
 const app = express();
 
 
 const corsOptions = {
-  origin: "https://mern-ecommerce-client-ecru.vercel.app/",
+  origin: "http://localhost:3000",
   methods: ['POST', 'GET'],
   credentials: true 
 };
@@ -20,12 +19,8 @@ const corsOptions = {
 
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
-  res.setHeader('Referrer-Policy', 'no-referrer');
-  next();
-});
 
-app.options('*', cors(corsOptions)); 
+
 
 app.use("/user", userRouter);
 app.use("/product", productRouter);
@@ -33,7 +28,7 @@ app.get("/hello", (req, res) => {
   res.json("hello");
 });
 
-mongoose.connect("mongodb+srv://neginalipanahi:N1e-g2i%2Fn1368@ecommerce.v1fle7p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce");
+mongoose.connect("mongodb+srv://neginalipanahi:N1e-g2i%2Fn1368@ecommerce.v1fle7p.mongodb.net/ecommerce");
 
 app.listen( 3001, () => {
   console.log("server started");

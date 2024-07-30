@@ -24,8 +24,6 @@ const Register = () => {
       await axios.post(`${api}/user/register`, {
         username,
         password,
-      } , {
-        withCredentials: true
       });
       alert("registration completed! Now login!");
     } catch (err) {
@@ -73,15 +71,12 @@ const Login = () => {
   const { setIsAuthenticated } =
     useContext<IShopContext>(ShopContext);
     const api = "https://nealphi-server.vercel.app"
-
     const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
       const result = await axios.post(`${api}/user/login`, {
         username,
         password,
-      }, {
-        withCredentials: true
       });
       
       setCookies("access_token", result.data.token);
