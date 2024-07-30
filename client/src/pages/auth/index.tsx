@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UserErrors } from "../../models/errors";
 import "./styles.css";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
+
 const AuthPage = () => {
   return (
     <div className="auth">
@@ -24,10 +25,10 @@ const Register = () => {
       await axios.post("https://nealphi-server.vercel.app/user/register", {
         username,
         password,
-      });
-      alert("registration completed! Now login!");
+      }, { withCredentials: true }); // Ensure credentials are sent
+      alert("Registration completed! Now login!");
     } catch (err) {
-      if (err?.respose?.data?.type === UserErrors.USERNAME_ALREADY_EXISTS) {
+      if (err?.response?.data?.type === UserErrors.USERNAME_ALREADY_EXISTS) {
         alert("Error: Username already in use");
       } else {
         alert("Error: Something went wrong");
@@ -40,7 +41,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <h2>Register</h2>
         <div className="form-group">
-          <label htmlFor="username"> Username: </label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -49,7 +50,7 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password"> Password: </label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -66,11 +67,10 @@ const Register = () => {
 const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [ _ , setCookies] = useCookies(["access_token"]);
+  const [_, setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
 
-  const { setIsAuthenticated } =
-    useContext<IShopContext>(ShopContext);
+  const { setIsAuthenticated } = useContext<IShopContext>(ShopContext);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -78,7 +78,8 @@ const Login = () => {
       const result = await axios.post("https://nealphi-server.vercel.app/user/login", {
         username,
         password,
-      });
+      }, { withCredentials: true }); // Ensure credentials are sent
+
       setCookies("access_token", result.data.token);
       window.localStorage.setItem("userID", result.data.userID);
       window.localStorage.setItem("username", username);
@@ -106,7 +107,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="form-group">
-          <label htmlFor="username"> Username: </label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -115,7 +116,7 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password"> Password: </label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"

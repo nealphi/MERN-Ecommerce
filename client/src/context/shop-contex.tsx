@@ -23,60 +23,36 @@ export interface IShopContext {
   setSelectedTab: (selectedTab: string) => void;
 }
 
-// const defaultVal: IShopContext = {
-//   addToCart: () => null,
-//   removeFromCart: () => null,
-//   updateCartItemCount: () => null,
-//   getCartItems: () => null,
-//   getCartItemCount: () => 0,
-//   getTotalCartAmount: () => 0,
-//   checkout: () => null,
-//   availableMoney: 0,
-//   fetchAvailableMoney: () => null,
-//   purchasedItems: [],
-//   isAuthenticated: false,
-//   setIsAuthenticated: () => null,
-//   selectedTab: "top",
-//   setSelectedTab: () => null,
-// };
-
 export const ShopContext = createContext<IShopContext | null>(null);
 
 export const ShopContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [cartItems, setCartItems] = useState<{ [key: string]: number } | {}>(
-    {}
-  );
+  const [cartItems, setCartItems] = useState<{ [key: string]: number } | {}>({});
   const [availableMoney, setAvailableMoney] = useState<number>(0);
   const [purchasedItems, setPurchasedItems] = useState<IProduct[]>([]);
   const { products, fetchProducts } = useGetProducts();
   const { headers } = useGetToken();
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    cookies.access_token !== null
-  );
-  const[selectedTab, setSelectedTab] = useState<string>("top")
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(cookies.access_token !== null);
+  const [selectedTab, setSelectedTab] = useState<string>("top");
 
   const fetchAvailableMoney = async () => {
     try {
       const res = await axios.get(
-        `https://nealphi-server.vercel.app/user/available-money/${localStorage.getItem(
-          "userID"
-        )}`,
-        { headers }
+        `https://nealphi-server.vercel.app/user/available-money/${localStorage.getItem("userID")}`,
+        { headers, withCredentials: true } // Include credentials in the request
       );
       setAvailableMoney(res.data.availableMoney);
     } catch (err) {
       alert("ERROR: fetchAvailableMoney");
     }
   };
+
   const fetchPurchasedItems = async () => {
     try {
       const res = await axios.get(
-        `https://nealphi-server.vercel.app/product/purchased-items/${localStorage.getItem(
-          "userID"
-        )}`,
-        { headers }
+        `https://nealphi-server.vercel.app/product/purchased-items/${localStorage.getItem("userID")}`,
+        { headers, withCredentials: true } // Include credentials in the request
       );
       setPurchasedItems(res.data.purchasedItems);
     } catch (err) {
@@ -91,42 +67,43 @@ export const ShopContextProvider = (props) => {
     return 0;
   };
 
-  
-
   const addToCart = async (itemId: string) => {
     setCartItems((prev) => {
       const updatedCartItems = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
       const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
       
       // Make sure to use updatedCartItems here
-      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers })
+      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers, withCredentials: true })
         .catch(error => console.error("Error adding to cart", error));
       
       return updatedCartItems;
     });
   };
-  
+
   const removeFromCart = async (itemId: string) => {
     setCartItems((prev) => {
       if (!prev[itemId]) return prev;
       const updatedCartItems = { ...prev, [itemId]: prev[itemId] - 1 };
       const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
-        axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers })
+      
+      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers, withCredentials: true })
         .catch(error => console.error("Error removing from cart", error));
+      
       return updatedCartItems;
     });
   };
+
   const updateCartItemCount = async (newAmount: number, itemId: string) => {
     if (newAmount < 0) return;
-  
+
     setCartItems((prev) => {
       const updatedCartItems = { ...prev, [itemId]: newAmount };
       const body = { customerID: localStorage.getItem("userID"), cartItems: updatedCartItems };
-  
+
       // Make sure to use updatedCartItems in the API call
-      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers })
+      axios.post("https://nealphi-server.vercel.app/product/cart/edit", body, { headers, withCredentials: true })
         .catch(error => console.error("Error updating cart item count", error));
-  
+
       return updatedCartItems;
     });
   };
@@ -134,7 +111,8 @@ export const ShopContextProvider = (props) => {
   const getCartItems = async () => {
     try {
       const response = await axios.get(
-        `https://nealphi-server.vercel.app/product/cart/${localStorage.getItem("userID")}`,  { headers }
+        `https://nealphi-server.vercel.app/product/cart/${localStorage.getItem("userID")}`,
+        { headers, withCredentials: true } // Include credentials in the request
       );
       if (response.data.success) {
         setCartItems(response.data.cartItems); // Update your state with retrieved cart items
@@ -143,7 +121,6 @@ export const ShopContextProvider = (props) => {
       console.error("Error getting cart items", error);
     }
   };
-
 
   const getTotalCartAmount = () => {
     if (products.length === 0) return 0;
@@ -163,9 +140,7 @@ export const ShopContextProvider = (props) => {
   const checkout = async () => {
     const body = { customerID: localStorage.getItem("userID"), cartItems };
     try {
-      await axios.post("https://nealphi-server.vercel.app/product/checkout", body, {
-        headers,
-      });
+      await axios.post("https://nealphi-server.vercel.app/product/checkout", body, { headers, withCredentials: true });
       setCartItems({});
       fetchAvailableMoney();
       fetchPurchasedItems();
@@ -175,7 +150,6 @@ export const ShopContextProvider = (props) => {
       console.log(err);
     }
   };
-
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -191,7 +165,6 @@ export const ShopContextProvider = (props) => {
       setCookies("access_token", null);
     }
   }, [isAuthenticated]);
-
 
   const contextValue: IShopContext = {
     addToCart,

@@ -15,13 +15,16 @@ const useGetProducts = () => {
  
   const fetchProducts = async () => {
     try {
-      const fetchedProducts = await axios.get("https://nealphi-server.vercel.app/product", {headers});
+      const fetchedProducts = await axios.get("https://nealphi-server.vercel.app/product", {
+        headers,
+        withCredentials: true, // Include credentials in the request
+      });
       setProducts(fetchedProducts.data.products);
     } catch (err) {
       alert("ERROR: fetchProducts!");
     }
   };
-
+  
   useEffect(() => {
     if (isAuthenticated)
     fetchProducts();

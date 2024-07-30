@@ -6,11 +6,12 @@ import { productRouter } from "./routes/product";
 
 const app = express();
 
+
 app.use(cors({
   origin: 'https://mern-ecommerce-client-ecru.vercel.app',
-  methods: ["POST","GET"],
+  methods: ['POST', 'GET'],
   credentials: true
-}))
+}));
 
 app.use(express.json());
 
