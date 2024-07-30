@@ -17,7 +17,7 @@ const AuthPage = () => {
 const Register = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const api = "https://nealphi-server.vercel.app/"
+  const api = "https://nealphi-server.vercel.app"
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
@@ -70,7 +70,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setIsAuthenticated } =
     useContext<IShopContext>(ShopContext);
-    const api = "https://nealphi-server.vercel.app/"
+    const api = "https://nealphi-server.vercel.app"
 
     const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
