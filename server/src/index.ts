@@ -12,7 +12,7 @@ const app = express();
 
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL || "http://localhost:3000/",
+  origin: "https://mern-ecommerce-client-ecru.vercel.app/",
   methods: ['POST', 'GET'],
   credentials: true 
 };
@@ -29,10 +29,10 @@ app.get("/hello", (req, res) => {
   res.json("hello");
 });
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect("mongodb+srv://neginalipanahi:N1e-g2i%2Fn1368@ecommerce.v1fle7p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce");
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`Server started on port ${process.env.PORT || 3001}`);
+app.listen( 3001, () => {
+  console.log("server started");
 });
 
 // mongoose.connect(
