@@ -10,15 +10,15 @@ import dotenv from "dotenv";
 const app = express();
 
 
-const corsOptions = {
-  origin: "http://localhost:3000",
-  methods: ['POST', 'GET'],
-  credentials: true 
-};
+// const corsOptions = {
+//   origin: "http://localhost:3000/",
+//   methods: ['POST', 'GET'],
+//   credentials: true 
+// };
 
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 
