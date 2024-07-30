@@ -8,7 +8,8 @@ const app = express();
 
 // Use CORS middleware
 app.use(cors({
-  origin: 'https://mern-ecommerce-client-ecru.vercel.app',
+  // origin: 'https://mern-ecommerce-client-ecru.vercel.app',
+  origin: true, // Allow all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
