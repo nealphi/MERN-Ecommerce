@@ -8,7 +8,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'mern-ecommerce-client-ecru.vercel.app',
+  origin: 'https://mern-ecommerce-client-ecru.vercel.app',
   methods: ['POST', 'GET'],
   credentials: true
 }));

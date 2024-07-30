@@ -10,7 +10,7 @@ const user_1 = require("./routes/user");
 const product_1 = require("./routes/product");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: 'mern-ecommerce-client-ecru.vercel.app',
+    origin: 'https://mern-ecommerce-client-ecru.vercel.app',
     methods: ['POST', 'GET'],
     credentials: true
 }));
