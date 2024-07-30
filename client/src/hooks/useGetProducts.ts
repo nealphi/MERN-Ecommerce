@@ -15,7 +15,7 @@ const useGetProducts = () => {
  
   const fetchProducts = async () => {
     try {
-      const fetchedProducts = await axios.get("https://nealphi-server.vercel.app/product", {
+      const fetchedProducts = await axios.get("/product", {
         headers,
         withCredentials: true, // Include credentials in the request
       });

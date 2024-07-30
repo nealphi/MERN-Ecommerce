@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("https://nealphi-server.vercel.app/user/register", {
+      await axios.post("/user/register", {
         username,
         password,
       });
@@ -70,14 +70,14 @@ const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [ _ , setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   const { setIsAuthenticated } =
     useContext<IShopContext>(ShopContext);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      const result = await axios.post("https://nealphi-server.vercel.app/user/login", {
+      const result = await axios.post("/user/login", {
         username,
         password,
       });
