@@ -13,6 +13,7 @@ export interface IShopContext {
   getCartItems: () => void;
   getCartItemCount: (itemId: string) => number;
   getTotalCartAmount: () => number;
+  getTotalCartItems: () => number;
   checkout: () => void;
   availableMoney: number;
   fetchAvailableMoney: () => void;
@@ -30,6 +31,7 @@ const defaultVal: IShopContext = {
   getCartItems: () => null,
   getCartItemCount: () => 0,
   getTotalCartAmount: () => 0,
+  getTotalCartItems: () => 0,
   checkout: () => null,
   availableMoney: 0,
   fetchAvailableMoney: () => null,
@@ -180,6 +182,10 @@ export const ShopContextProvider = (props) => {
     }
     return Number(totalAmount.toFixed(2));
   };
+  
+  const getTotalCartItems = () => {
+    return Object.values(cartItems).reduce((total, num) => total + num, 0);
+  };
 
   const checkout = async () => {
     const body = { customerID: localStorage.getItem("userID"), cartItems };
@@ -223,6 +229,7 @@ export const ShopContextProvider = (props) => {
     getCartItems,
     getCartItemCount,
     getTotalCartAmount,
+    getTotalCartItems,
     checkout,
     availableMoney,
     fetchAvailableMoney,

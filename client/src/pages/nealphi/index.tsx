@@ -8,21 +8,22 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
 import VideoComponent from "../../components/Video";
+
 const NealphiPage = () => {
   const imageSrc = [
-    { "src" :"../1.jpeg"},
-    { "src" :"../2.jpeg"},
-    { "src" :"../3.jpeg"},
-    { "src" :"../4.jpeg"},
-    { "src" :"../5.jpeg"},
-    { "src" :"../6.jpeg"},
-    { "src" :"../7.jpeg"},
-    { "src" :"../8.jpeg"}
-   ]
+    { src: "../1.jpeg" },
+    { src: "../2.jpeg" },
+    { src: "../3.jpeg" },
+    { src: "../4.jpeg" },
+    { src: "../5.jpeg" },
+    { src: "../6.jpeg" },
+    { src: "../7.jpeg" },
+    { src: "../8.jpeg" },
+  ];
   const { selectedTab, setSelectedTab, isAuthenticated } =
     useContext<IShopContext>(ShopContext);
   const topRef = useRef(null);
@@ -31,6 +32,11 @@ const NealphiPage = () => {
   const redirect = () => {
     isAuthenticated ? navigate("/shop") : navigate("/auth");
   };
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   useEffect(() => {
     const scrollToRef = (ref) => {
@@ -55,7 +61,7 @@ const NealphiPage = () => {
   return (
     <Box>
       <Grid
-        className="intro"
+       
         backgroundColor={"#a09b94"}
         templateColumns={{
           sm: "repeat(1, 1fr)",
@@ -70,7 +76,7 @@ const NealphiPage = () => {
             src="../collection.jpeg"
           />
         </GridItem>
-        <GridItem h={"100%"} textAlign={"center"} alignContent={"center"} p={5}>
+        <GridItem className={`intro ${isVisible ? "fade-in" : ""}`}  h={"100%"} textAlign={"center"} alignContent={"center"} p={5}>
           <Text fontFamily={"headings"} fontSize={"24px"}>
             Hey Bag Lovers! Welcome to the
           </Text>
@@ -105,7 +111,12 @@ const NealphiPage = () => {
         </GridItem>
       </Grid>
       <Box backgroundColor={"lightBeige"} ref={tutorialsRef}>
-        <Flex justifyContent={'center'} alignItems={'center'} h={"200px"} color={"black"}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          h={"200px"}
+          color={"black"}
+        >
           <Text fontFamily={"headings"} fontSize={"36px"}>
             For more inspiration, follow us at{" "}
             <Link href="https://www.instagram.com/nealphi/"> @nealphi. </Link>
@@ -126,6 +137,8 @@ const NealphiPage = () => {
           ))}
         </Grid>
       </Box>
+    
+
     </Box>
   );
 };

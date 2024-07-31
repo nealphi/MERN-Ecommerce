@@ -2,7 +2,16 @@
   box-sizing: border-box;
 }
 
+.intro {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+}
 
+.intro.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .App {
  display: flex;
@@ -29,8 +38,15 @@ body {
   background-color: rgb(134, 174, 173);
   color: white;
   padding: 20px;
+
 }
 
+.navbar a {
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+}
 
 .video {
   width: 100%;
