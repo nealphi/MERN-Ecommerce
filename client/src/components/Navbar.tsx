@@ -58,7 +58,7 @@ export const Navbar = () => {
           <Menu>
             <MenuButton>
               <Link>
-                <Icon boxSize={5} as={FaUser} mr={1}/> Hello {username}
+                <Icon boxSize={5} as={FaUser} mr={1} /> Hello {username}
               </Link>
             </MenuButton>
             <MenuList>
@@ -79,14 +79,12 @@ export const Navbar = () => {
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <MenuItem justifyContent={"space-between"}>
-                  <Link href="/" onClick={logout}>
+                <Link href="/" onClick={logout} _hover={{ textDecoration: "none" }} >
+                  <MenuItem justifyContent={"space-between"}>
                     Logout
-                  </Link>
-                  <Link href="/" onClick={logout}>
                     <Icon boxSize={5} as={FaArrowRightFromBracket} />
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
               </MenuGroup>
             </MenuList>
           </Menu>

@@ -90,6 +90,7 @@ const NealphiPage = () => {
             py={"5%"}
             my={10}
             backgroundColor={"lightGreen"}
+            color={'white'}
             _hover={{ backgroundColor: "darkGreen" }}
             transition={"all, linear, 0.1s"}
           >

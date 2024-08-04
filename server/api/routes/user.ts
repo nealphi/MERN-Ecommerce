@@ -7,14 +7,18 @@ import { UserErrors } from "../errors";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, username, password } = req.body;
   try {
     const user = await UserModel.findOne({ username });
     if (user) {
       return res.status(400).json({ type: UserErrors.USERNAME_ALREADY_EXISTS });
     }
+    const userEmail = await UserModel.findOne({ email });
+    if (userEmail) {
+      return res.status(400).json({ type: UserErrors.EMAIL_ALREADY_EXISTS });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new UserModel({ username, password: hashedPassword });
+    const newUser = new UserModel({ email, username, password: hashedPassword });
     await newUser.save();
     res.json({ message: "User registered successfully" });
   } catch (err) {

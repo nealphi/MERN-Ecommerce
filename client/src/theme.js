@@ -1,13 +1,14 @@
 import { extendTheme } from "@chakra-ui/react";
 import '@fontsource-variable/cinzel';
+import { inputTheme } from "./components/input";
 const config = {
-  
-  initialColorMode: "dark",
+  initialColorMode: 'system',
   useSystemColorMode: false,
 };
 
 const theme = extendTheme({
   config,
+  components: { Input: inputTheme },
   fonts: {
     heading: 'Cinzel Variable',
     body: `'Raleway', sans-serif`,
