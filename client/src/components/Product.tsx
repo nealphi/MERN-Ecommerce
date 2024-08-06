@@ -46,7 +46,7 @@ const Product = (props: Props) => {
         <Image src={imageURL} alt={productName} borderRadius="lg" />
         <Stack mt="6" spacing="3">
           <Heading size="md">{productName}</Heading>
-          <Text color="blue.600" fontSize="2xl">
+          <Text fontSize="xl">
           $ {price}
           </Text>
         </Stack>
@@ -54,12 +54,12 @@ const Product = (props: Props) => {
       <Divider />
       <CardFooter>
       {isAuthenticated && (
-          <Flex justifyContent={'space-between'} alignItems={'center'}>
-            <Button margin={2} onClick={() => addToCart(_id)}>
+          <Flex mt={2} width={'100%'} justifyContent={'space-between'} alignItems={'center'} >
+            <Button onClick={() => addToCart(_id)}>
               {" "}
               {count === 0 ? "Add To Cart" : "Add more"}{" "}
             </Button>
-            <Text margin={1} fontSize={"small"}>
+            <Text margin={1} fontSize={"medium"}>
               {count === 0 ? " " : `${count} in Cart`}
             </Text>
             {stockQuantity === 0 && <Text>Out Of Stock</Text>}
@@ -80,18 +80,18 @@ const Product = (props: Props) => {
         
         <ModalContent >
           <ModalHeader>{productName}</ModalHeader>
-          <Image src={imageURL} alt={productName} borderRadius="lg" margin={"20px"}/>
+          <Image src={imageURL} alt={productName} borderRadius="lg" marginX={"20px"}/>
           <ModalCloseButton />
           <ModalBody>
            {description}
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
+          {/* <ModalFooter>
+            <Button colorScheme='blue' onClick={() => addToCart(_id)}>
+              Add to Cart
             </Button>
             <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
+          </ModalFooter> */}
         </ModalContent>
         
       </Modal>

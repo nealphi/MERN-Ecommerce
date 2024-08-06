@@ -5,6 +5,7 @@ import { IProduct } from "../../models/interfaces";
 import CartItem from "./CartItem";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
+import { Flex, Stack } from "@chakra-ui/react";
 
 const CheckoutPage = () => {
   const { getCartItemCount, getTotalCartAmount, checkout } =
@@ -15,15 +16,12 @@ const CheckoutPage = () => {
 
   return (
     <div className="cart">
-      <div>
-        <h1>Your Cart Items</h1>
-      </div>
-      <div className="cart">
+      <Stack>
         {products.map((product: IProduct) => {
           if (getCartItemCount(product._id) !== 0)
             return <CartItem product={product} key={product.productName} />;
         })}
-      </div>
+      </Stack>
       {totalAmount > 0 ? (
         <div className="checkout">
           <p>Subtotal: ${totalAmount.toFixed(2)}</p>

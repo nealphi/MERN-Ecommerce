@@ -30,7 +30,7 @@ input:-webkit-autofill{
 .App {
  display: flex;
  flex-direction: column;
- background-color: rgb(134, 134, 134);
+ background-color: #d9d9d9;
 }
 
 body {

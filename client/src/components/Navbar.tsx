@@ -63,15 +63,15 @@ export const Navbar = () => {
             </MenuButton>
             <MenuList>
               <MenuGroup>
-                <MenuItem justifyContent={"space-between"}>
+              <Link href="/checkout"  _hover={{ textDecoration: "none" }} >
+                  <MenuItem justifyContent={"space-between"}>
                   <Text>
                     {count} {count > 1 ? "items" : "item"} in Cart
                   </Text>
 
-                  <Link href="/checkout">
-                    <Icon boxSize={6} as={FaCartShopping} />
-                  </Link>
-                </MenuItem>
+                  <Icon boxSize={6} as={FaCartShopping} />
+                  </MenuItem>
+                </Link>
                 <MenuItem justifyContent={"space-between"}>
                   <Text> ${availableMoney.toFixed(2)} Credit</Text>{" "}
                   <Icon boxSize={5} as={FaWallet} />

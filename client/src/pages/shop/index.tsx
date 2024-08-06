@@ -29,8 +29,8 @@ const ShopPage = () => {
         className={`intro ${isVisible ? "fade-in" : ""}`}
       >
         {products.map((product) => (
-          <GridItem>
-            <Product product={product} key={product.productName} />
+          <GridItem key={product.productName}>
+            <Product product={product}  />
           </GridItem>
         ))}
       </Grid>

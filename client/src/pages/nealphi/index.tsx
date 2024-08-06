@@ -62,7 +62,8 @@ const NealphiPage = () => {
     <Box>
       <Grid
        
-        backgroundColor={"#a09b94"}
+        backgroundColor={"mocha"}
+        // backgroundColor={"#a09b94"}
         templateColumns={{
           sm: "repeat(1, 1fr)",
           md: "repeat(2, 1fr)",

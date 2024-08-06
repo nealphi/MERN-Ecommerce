@@ -44,6 +44,7 @@ const Register = ({ isVisible, setIsVisible }) => {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
+  let navigate = useNavigate();
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -62,6 +63,7 @@ const Register = ({ isVisible, setIsVisible }) => {
       setEmail(" ");
       setUsername(" ");
       setPassword(" ");
+      setIsVisible("login");
     } catch (err) {
       if (err?.respose?.data?.type === UserErrors.USERNAME_ALREADY_EXISTS) {
         alert("Error: Username already in use");
@@ -108,6 +110,8 @@ const Register = ({ isVisible, setIsVisible }) => {
                     placeholder={"Email"}
                     type="email"
                     id="email"
+                    focusBorderColor="darkGreen"
+                    borderColor="lightGreen"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -123,6 +127,8 @@ const Register = ({ isVisible, setIsVisible }) => {
                     placeholder={"Username"}
                     type="text"
                     id="username"
+                    focusBorderColor="darkGreen"
+                    borderColor="lightGreen"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -139,6 +145,8 @@ const Register = ({ isVisible, setIsVisible }) => {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     id="password"
+                    focusBorderColor="darkGreen"
+                    borderColor="lightGreen"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
