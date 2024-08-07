@@ -11,19 +11,44 @@ const CartItem = (props: Props) => {
   const { addToCart, getCartItemCount, removeFromCart, updateCartItemCount } =
     useContext<IShopContext>(ShopContext);
   const cartItemCount = getCartItemCount(_id);
+  const totalPrice = price * cartItemCount ;
   return (
-      <Flex width={'60vw'} padding={'30px'} bg={'gray.100'} marginY={'20px'} borderRadius={'20px'} justifyContent={'space-between'} alignItems={'center'}>
-        <Image width={'20%'} src={imageURL} alt={productName} borderRadius={'20px'}/>
-        <Text fontSize={["16px","24px"]}  >{productName}</Text>
-        <Text>Price ${price}</Text>
-        <Stack>
-          <Button bg={'lightGreen'} onClick={() => removeFromCart(_id)}> - </Button>
-          <Input  type="number"
+    <Flex
+      flexDirection={["column", "column", "row"]}
+      width={["80vw", "80vw", "60vw"]}
+      padding={"30px"}
+      bg={"gray.100"}
+      gap={5}
+      m={5}
+      borderRadius={"20px"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      {/* <Text fontSize={["16px", "24px"]}>{productName}</Text> */}
+      <Image
+        width={["80%", "80%", "30%"]}
+        src={imageURL}
+        alt={productName}
+        borderRadius={"20px"}
+      />
+      <Stack width={"150px"}>
+      <Text>Price ${totalPrice} </Text>
+
+        <Button bg={"lightGreen"} _hover={{bg:"darkGreen" }} color={"white"} onClick={() => removeFromCart(_id)}>
+          {" "}
+          -{" "}
+        </Button>
+        <Input
+          type="number"
           value={cartItemCount}
-          onChange={(e) => updateCartItemCount(Number(e.target.value), _id)} />
-          <Button bg={'lightGreen'} onClick={() => addToCart(_id)}> + </Button>
-        </Stack>
-      </Flex>
+          onChange={(e) => updateCartItemCount(Number(e.target.value), _id)}
+        />
+        <Button bg={"lightGreen"} _hover={{bg:"darkGreen" }} color={"white"} onClick={() => addToCart(_id)}>
+          {" "}
+          +{" "}
+        </Button>
+      </Stack>
+    </Flex>
   );
 };
 

@@ -15,15 +15,18 @@ import VideoComponent from "../../components/Video";
 
 const NealphiPage = () => {
   const imageSrc = [
-    { src: "../1.jpeg" },
-    { src: "../2.jpeg" },
-    { src: "../3.jpeg" },
-    { src: "../4.jpeg" },
-    { src: "../5.jpeg" },
-    { src: "../6.jpeg" },
-    { src: "../7.jpeg" },
-    { src: "../8.jpeg" },
+    { src: "../1.jpeg", url: "/p/CV7wLvUopaZ/" },
+    { src: "../2.jpeg", url: "/p/Cry06NBIH7z/" },
+    { src: "../3.jpeg", url: "/p/CgbfLyioJdR/" },
+    { src: "../4.jpeg", url: "/p/CaKO8gUoZTI/" },
+    { src: "../5.jpeg", url: "/p/Cn9sYccI9OF/" },
+    { src: "../6.jpeg", url: "/p/CiFTPAeofaL/" },
+    { src: "../7.jpeg", url: "/p/CTcbIXrIi7d/" },
+    { src: "../8.jpeg", url: "/p/CW50vtWoOGg/" },
   ];
+  const openUrl = (url) => {
+    window.open(`https://www.instagram.com${url}`, '_blank', 'noopener,noreferrer');
+  };
   const { selectedTab, setSelectedTab, isAuthenticated } =
     useContext<IShopContext>(ShopContext);
   const topRef = useRef(null);
@@ -61,7 +64,6 @@ const NealphiPage = () => {
   return (
     <Box>
       <Grid
-       
         backgroundColor={"mocha"}
         // backgroundColor={"#a09b94"}
         templateColumns={{
@@ -77,7 +79,13 @@ const NealphiPage = () => {
             src="../collection.jpeg"
           />
         </GridItem>
-        <GridItem className={`intro ${isVisible ? "fade-in" : ""}`}  h={"100%"} textAlign={"center"} alignContent={"center"} p={5}>
+        <GridItem
+          className={`intro ${isVisible ? "fade-in" : ""}`}
+          h={"100%"}
+          textAlign={"center"}
+          alignContent={"center"}
+          p={5}
+        >
           <Text fontFamily={"headings"} fontSize={"24px"}>
             Hey Bag Lovers! Welcome to the
           </Text>
@@ -91,7 +99,7 @@ const NealphiPage = () => {
             py={"5%"}
             my={10}
             backgroundColor={"lightGreen"}
-            color={'white'}
+            color={"white"}
             _hover={{ backgroundColor: "darkGreen" }}
             transition={"all, linear, 0.1s"}
           >
@@ -133,14 +141,12 @@ const NealphiPage = () => {
           }}
         >
           {imageSrc.map((image) => (
-            <GridItem p={2}>
-              <Image src={image.src} />
+            <GridItem cursor={"pointer"} p={2}>
+              <Image src={image.src} onClick={() => openUrl(image.url)} />
             </GridItem>
           ))}
         </Grid>
       </Box>
-    
-
     </Box>
   );
 };

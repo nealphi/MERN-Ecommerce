@@ -5,7 +5,7 @@ import { IProduct } from "../../models/interfaces";
 import CartItem from "./CartItem";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
-import { Flex, Stack } from "@chakra-ui/react";
+import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
 
 const CheckoutPage = () => {
   const { getCartItemCount, getTotalCartAmount, checkout } =
@@ -15,23 +15,23 @@ const CheckoutPage = () => {
   const totalAmount = getTotalCartAmount();
 
   return (
-    <div className="cart">
-      <Stack>
+    <Flex bg={"gray.200"} width={"100%"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} gap={5} p={10}>
+      <Stack >
         {products.map((product: IProduct) => {
           if (getCartItemCount(product._id) !== 0)
             return <CartItem product={product} key={product.productName} />;
         })}
       </Stack>
       {totalAmount > 0 ? (
-        <div className="checkout">
-          <p>Subtotal: ${totalAmount.toFixed(2)}</p>
-          <button onClick={() => navigate("/")}>Continue Shopping </button>
-          <button onClick={checkout}>Checkout</button>
-        </div>
+        <Flex flexDirection={["column","column","row"]} justifyContent={"center"} alignItems={"center"} gap={5}>
+          <Text fontSize={"lg"} as={"b"} color={"white"}>Subtotal: ${totalAmount.toFixed(2)}</Text>
+          <Button  bg={"lightGreen"} _hover={{bg:"darkGreen" }} color={"white"}  onClick={() => navigate("/shop")}>Continue Shopping </Button>
+          <Button bg={"lightGreen"} _hover={{bg:"darkGreen" }} color={"white"} onClick={checkout}>Checkout</Button>
+        </Flex>
       ) : (
-        <h1>Your Shopping Cart is Empty</h1>
+        <Text>Your Shopping Cart is Empty</Text>
       )}
-    </div>
+    </Flex>
   );
 };
 

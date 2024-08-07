@@ -67,3 +67,28 @@ body {
   min-width: 350px;
 }
 
+.magnifier-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  cursor: zoom-in; /* Indicates zoom functionality */
+}
+
+.magnifier-image {
+  display: block;
+  max-width: 100%;
+}
+
+.magnifier-glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+    pointer-events: none;
+  background-repeat: no-repeat;
+  display: none; /* Hide magnifier by default */
+  z-index: 999; /* Ensure magnifier is on top */
+}
+
