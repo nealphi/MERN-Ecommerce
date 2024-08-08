@@ -12,8 +12,32 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
 import VideoComponent from "../../components/Video";
+import { ContactUs } from "../../components/ContactUs";
+import YoutubeEmbed from "../../components/YoutubeEmbed";
 
 const NealphiPage = () => {
+  // const YouTubeVideos = [
+  //   {
+  //     embedId: "pa0n47LARZE?si=CKk-TbWzq8L9hVHu",
+  //     description: "Transparent Tote Bag Tutorial (English)",
+  //   },
+  //   {
+  //     embedId: "llsFdu0aQ0w?si=QEJvnc98bcMCL6Uz",
+  //     description: "Clear Zippered Boxy Pouch Tutorial (English)",
+  //   },
+  //   {
+  //     embedId: "a4CPYPGOZ5Q?si=VgLJSzN7UiLyJkaF",
+  //     description: "Transparent Beauty Pouch Tutorial (English)",
+  //   },
+  //   {
+  //     embedId: "spwS0XQpS2g?si=BMTIbaAqpUm_L7Z3",
+  //     description: "Clear Zippered Boxy Pouch Tutorial (Persian)",
+  //   },
+  //   {
+  //     embedId: "SQlI8GHD4lI?si=QRbawvKnQOqHTDWO",
+  //     description: "Mini Clear Pouch Tutorial (Persian) ",
+  //   },
+  // ];
   const imageSrc = [
     { src: "../1.jpeg", url: "/p/CV7wLvUopaZ/" },
     { src: "../2.jpeg", url: "/p/Cry06NBIH7z/" },
@@ -25,7 +49,11 @@ const NealphiPage = () => {
     { src: "../8.jpeg", url: "/p/CW50vtWoOGg/" },
   ];
   const openUrl = (url) => {
-    window.open(`https://www.instagram.com${url}`, '_blank', 'noopener,noreferrer');
+    window.open(
+      `https://www.instagram.com${url}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
   const { selectedTab, setSelectedTab, isAuthenticated } =
     useContext<IShopContext>(ShopContext);
@@ -65,48 +93,46 @@ const NealphiPage = () => {
     <Box>
       <Grid
         backgroundColor={"mocha"}
-        // backgroundColor={"#a09b94"}
         templateColumns={{
           sm: "repeat(1, 1fr)",
-          md: "repeat(2, 1fr)",
+          md: "repeat(1, 1fr)",
           lg: "repeat(2, 1fr)",
         }}
+        p={[0, 10]}
       >
-        <GridItem ref={topRef}>
-          <Image
-            p={5}
-            transition={"all, linear, 0.1s"}
-            src="../collection.jpeg"
-          />
+        <GridItem ref={topRef} >
+          <VideoComponent />
         </GridItem>
         <GridItem
           className={`intro ${isVisible ? "fade-in" : ""}`}
           h={"100%"}
           textAlign={"center"}
           alignContent={"center"}
-          p={5}
+          pt={[5,10]}
+
         >
-          <Text fontFamily={"headings"} fontSize={"24px"}>
-            Hey Bag Lovers! Welcome to the
+          <Text fontFamily={"body"} fontSize={["14px","16px","20px"]}>
+            Hey Bag Lovers! Welcome to the NEALPHI's
           </Text>
-          <Text fontFamily={"headings"} fontSize={"68px"}>
+          <Text fontFamily={"headings"} fontSize={["28px","44px","56px"]}>
             SUMMER PARTY!
           </Text>
           <Button
-            fontSize={["24px"]}
+            fontFamily={"body"}
+            fontSize={["18px","24px"]}
             onClick={redirect}
-            px={"20%"}
-            py={"5%"}
-            my={10}
+           p={[5,10]}
+            my={[5,10]}
             backgroundColor={"lightGreen"}
             color={"white"}
             _hover={{ backgroundColor: "darkGreen" }}
             transition={"all, linear, 0.1s"}
           >
-            SHOP NEALPHI!
+            SHOP NEALPHI
           </Button>
         </GridItem>
       </Grid>
+
       <Grid
         backgroundColor={"beige"}
         templateColumns={{
@@ -114,54 +140,113 @@ const NealphiPage = () => {
           md: "repeat(2, 1fr)",
           lg: "repeat(2, 1fr)",
         }}
+        p={[5, 10]}
+        gap={10}
       >
-        <GridItem p={5}></GridItem>
-        <GridItem display={"flex"} justifyContent={"end"} p={5}>
-          <VideoComponent />
+        <GridItem></GridItem>
+
+        <GridItem display={"flex"} justifyContent={"end"}>
+          <Image
+            transition={"all, linear, 0.1s"}
+            src="../collection.jpeg"
+          />
         </GridItem>
       </Grid>
-      <Box backgroundColor={"lightBeige"} ref={tutorialsRef}>
-        <Flex
-          justifyContent={"center"}
-          alignItems={"center"}
-          h={"200px"}
-          color={"black"}
+      <Grid
+        templateColumns={{
+          sm: "repeat(1, 1fr)",
+          md: "repeat(1, 1fr)",
+          lg: "repeat(2, 1fr)",
+        }}
+        p={10}
+        bgColor={"lightBeige"}
+        gap={10}
+      >
+        <GridItem p={5}>
+          <Image
+            className="fade-in"
+            transition={"all, 0.1s"}
+            src="../neginpanahi3.jpeg"
+          />
+          {/* <Flex
+            // filter="grayscale(100%)"
+            // _hover={{ filter: "grayscale(0%)" }}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            p={5}
+          >
+            {YouTubeVideos.map((video) => (
+              <YoutubeEmbed embedId={video.embedId} />
+            ))}
+          </Flex> */}
+        </GridItem>
+        <GridItem
+          display={"flex"}
+          flexDirection={"column"}
+          textAlign={"justify"}
+          p={5}
         >
-          <Text fontFamily={"headings"} fontSize={"36px"}>
-            For more inspiration, follow us at{" "}
-            <Link href="https://www.instagram.com/nealphi/"> @nealphi. </Link>
+          <Text fontSize={["14px", "16px"]}>
+            After graduating from the Art University of Tehran in 2020, Negin
+            Alphi started her business, NEALPHI, by turning an old garage into
+            her workspace. NEALPHI offers handmade products, each showing
+            Negin's dedication to quality and detail. Her focus on authenticity
+            and craftsmanship helped NEALPHI quickly gain recognition and a
+            loyal customer base.
           </Text>
-        </Flex>
-
+          <Text fontSize={["14px", "16"]}>
+            NEALPHI's story is not just about high quality handmade items but
+            also about the strength and power of women. It highlights the
+            success of a business run entirely by women and demonstrates how
+            female entrepreneurship can transform simple beginnings into
+            thriving ventures.
+          </Text>
+          <Text fontSize={["14px", "14px", "16"]}>
+            Aligned with her dedication to women empowerment, Negin also
+            publishes free tutorials on NEALPHI's YouTube channel and runs
+            workshops to help other women start their own businesses. She
+            believes in sharing her knowledge and skills to support and inspire
+            other women to pursue their entrepreneurial dreams.
+          </Text>
+        </GridItem>
+      </Grid>
+      <Box backgroundColor={"lightBeige"} p={10} ref={tutorialsRef}>
         <Grid
           templateColumns={{
             base: "repeat(2, 1fr)",
             sm: "repeat(2, 1fr)",
             lg: "repeat(4, 1fr)",
           }}
+          p={5}
+          gap={2}
         >
           {imageSrc.map((image) => (
-            <GridItem cursor={"pointer"} p={2}>
+            <GridItem cursor={"pointer"}>
               <Image src={image.src} onClick={() => openUrl(image.url)} />
             </GridItem>
           ))}
         </Grid>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          h={"100px"}
+          color={"black"}
+          p={10}
+        >
+          <Text
+            textAlign={"center"}
+            fontFamily={"headings"}
+            fontSize={{ sm: "18px", md: "24px" }}
+            color={"mocha"}
+          >
+            For more inspiration, follow us on Instagram at{" "}
+            <Link href="https://www.instagram.com/nealphi/"> @nealphi </Link>
+          </Text>
+        </Flex>
       </Box>
+      <ContactUs />
     </Box>
   );
 };
 
 export default NealphiPage;
-
-/* {YouTubeVideos.map((video) => (
-          <GridItem
-            // filter="grayscale(100%)"
-            // _hover={{ filter: "grayscale(0%)" }}
-            justifyContent={"center"}
-            alignItems={"center"}
-            p={10}
-          >
-            <Text color={"black"}>{video.description}</Text>
-            <YoutubeEmbed embedId={video.embedId} />
-          </GridItem>
-        ))} */

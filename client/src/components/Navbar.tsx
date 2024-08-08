@@ -39,8 +39,13 @@ export const Navbar = () => {
   }, [selectedTab]);
 
   return (
-    <Flex className="navbar">
-      <Link onClick={() => setSelectedTab("top")} href="/" fontSize={"24px"}>
+    <Flex className="navbar" fontFamily={"body"}>
+      <Link
+        _hover={{ textDecoration: "none" }}
+        onClick={() => setSelectedTab("top")}
+        href="/"
+        fontSize={"24px"}
+      >
         NEALPHI
       </Link>
       <Flex gap={5}>
@@ -63,13 +68,13 @@ export const Navbar = () => {
             </MenuButton>
             <MenuList>
               <MenuGroup>
-              <Link href="/checkout"  _hover={{ textDecoration: "none" }} >
+                <Link href="/checkout" _hover={{ textDecoration: "none" }}>
                   <MenuItem justifyContent={"space-between"}>
-                  <Text>
-                    {count} {count > 1 ? "items" : "item"} in Cart
-                  </Text>
+                    <Text>
+                      {count} {count > 1 ? "items" : "item"} in Cart
+                    </Text>
 
-                  <Icon boxSize={6} as={FaCartShopping} />
+                    <Icon boxSize={6} as={FaCartShopping} />
                   </MenuItem>
                 </Link>
                 <MenuItem justifyContent={"space-between"}>
@@ -79,7 +84,11 @@ export const Navbar = () => {
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <Link href="/" onClick={logout} _hover={{ textDecoration: "none" }} >
+                <Link
+                  href="/"
+                  onClick={logout}
+                  _hover={{ textDecoration: "none" }}
+                >
                   <MenuItem justifyContent={"space-between"}>
                     Logout
                     <Icon boxSize={5} as={FaArrowRightFromBracket} />

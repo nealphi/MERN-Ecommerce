@@ -9,6 +9,9 @@ const baseStyle = definePartsStyle({
   field: {
     backgroundColor: 'red',
     color: 'teal.500', // change the input text color
+    _placeholder: {
+      color: 'teal.500',
+    }
   },
 })
 

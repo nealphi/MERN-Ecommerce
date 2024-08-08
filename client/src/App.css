@@ -1,7 +1,11 @@
 *{
   box-sizing: border-box;
+  
 }
 
+a, a:visited, a:hover, a:active, a:focus {
+  text-decoration: none;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -36,7 +40,6 @@ input:-webkit-autofill{
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   overflow-x: hidden;
 }
 
@@ -64,14 +67,14 @@ body {
 
 .video {
   width: 100%;
-  min-width: 350px;
+  min-width: 300px;
 }
 
 .magnifier-container {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  cursor: zoom-in; /* Indicates zoom functionality */
+  cursor: none; 
 }
 
 .magnifier-image {
@@ -90,5 +93,10 @@ body {
   background-repeat: no-repeat;
   display: none; /* Hide magnifier by default */
   z-index: 999; /* Ensure magnifier is on top */
+}
+
+form {
+  width: 90%;
+  max-width: 600px;
 }
 

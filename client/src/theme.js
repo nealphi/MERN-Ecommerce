@@ -10,7 +10,9 @@ const config = {
 };
 
 const theme = extendTheme({
+
   config,
+
   components: { Input: inputTheme, Menu: menuTheme, Card: cardTheme,  Modal: modalTheme },
   fonts: {
     heading: 'Cinzel Variable',
