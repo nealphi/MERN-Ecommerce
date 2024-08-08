@@ -99,30 +99,30 @@ const NealphiPage = () => {
           lg: "repeat(2, 1fr)",
         }}
         p={[0, 10]}
+        gap={[5,10]}
       >
-        <GridItem ref={topRef} >
+        <GridItem ref={topRef}>
           <VideoComponent />
         </GridItem>
         <GridItem
           className={`intro ${isVisible ? "fade-in" : ""}`}
           h={"100%"}
+          minH={'200px'}
           textAlign={"center"}
           alignContent={"center"}
-          pt={[5,10]}
-
         >
-          <Text fontFamily={"body"} fontSize={["14px","16px","20px"]}>
+          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
             Hey Bag Lovers! Welcome to the NEALPHI's
           </Text>
-          <Text fontFamily={"headings"} fontSize={["28px","44px","56px"]}>
+          <Text fontFamily={"headings"} fontSize={["28px", "44px", "56px"]}>
             SUMMER PARTY!
           </Text>
           <Button
             fontFamily={"body"}
-            fontSize={["18px","24px"]}
+            fontSize={["18px", "24px"]}
             onClick={redirect}
-           p={[5,10]}
-            my={[5,10]}
+            p={[5, 10]}
+            my={[5, 10]}
             backgroundColor={"lightGreen"}
             color={"white"}
             _hover={{ backgroundColor: "darkGreen" }}
@@ -146,10 +146,7 @@ const NealphiPage = () => {
         <GridItem></GridItem>
 
         <GridItem display={"flex"} justifyContent={"end"}>
-          <Image
-            transition={"all, linear, 0.1s"}
-            src="../collection.jpeg"
-          />
+          <Image transition={"all, linear, 0.1s"} src="../collection.jpeg" />
         </GridItem>
       </Grid>
       <Grid
@@ -158,11 +155,11 @@ const NealphiPage = () => {
           md: "repeat(1, 1fr)",
           lg: "repeat(2, 1fr)",
         }}
-        p={10}
+        p={[5, 10]}
         bgColor={"lightBeige"}
-        gap={10}
+        gap={[5, 10]}
       >
-        <GridItem p={5}>
+        <GridItem>
           <Image
             className="fade-in"
             transition={"all, 0.1s"}
@@ -184,7 +181,6 @@ const NealphiPage = () => {
           display={"flex"}
           flexDirection={"column"}
           textAlign={"justify"}
-          p={5}
         >
           <Text fontSize={["14px", "16px"]}>
             After graduating from the Art University of Tehran in 2020, Negin
@@ -210,14 +206,13 @@ const NealphiPage = () => {
           </Text>
         </GridItem>
       </Grid>
-      <Box backgroundColor={"lightBeige"} p={10} ref={tutorialsRef}>
+      <Box backgroundColor={"lightBeige"} p={[5, 10]} ref={tutorialsRef}>
         <Grid
           templateColumns={{
             base: "repeat(2, 1fr)",
             sm: "repeat(2, 1fr)",
             lg: "repeat(4, 1fr)",
           }}
-          p={5}
           gap={2}
         >
           {imageSrc.map((image) => (

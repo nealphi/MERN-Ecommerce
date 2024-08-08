@@ -39,8 +39,9 @@ export const ContactUs = () => {
       justifyContent={"center"}
       alignItems={"center"}
       bgColor={"white"}
-      p={"40px"}
-    >
+      p={[5, 10]}
+      h={'80vh'}
+      >
       <Text fontSize={["26px", "32", "38px"]} color={"lightGreen"} mb={10}>
         Contact Us
       </Text>

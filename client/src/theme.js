@@ -5,7 +5,7 @@ import { menuTheme } from "./components/menu";
 import { cardTheme } from "./components/card";
 import { modalTheme } from "./components/modal";
 const config = {
-  initialColorMode: 'system',
+  initialColorMode: 'dark',
   useSystemColorMode: false,
 };
 
