@@ -39,7 +39,7 @@ export const Navbar = () => {
   }, [selectedTab]);
 
   return (
-    <Flex className="navbar" fontFamily={"body"}>
+    <Flex className="navbar" fontFamily={"body"} >
       <Link
         _hover={{ textDecoration: "none" }}
         onClick={() => setSelectedTab("top")}
