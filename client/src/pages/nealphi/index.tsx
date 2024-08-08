@@ -99,7 +99,7 @@ const NealphiPage = () => {
           lg: "repeat(2, 1fr)",
         }}
         p={[0, 10]}
-        gap={[5,10]}
+        gap={[5, 10]}
       >
         <GridItem ref={topRef}>
           <VideoComponent />
@@ -107,7 +107,7 @@ const NealphiPage = () => {
         <GridItem
           className={`intro ${isVisible ? "fade-in" : ""}`}
           h={"100%"}
-          minH={'200px'}
+          minH={"200px"}
           textAlign={"center"}
           alignContent={"center"}
         >
@@ -143,7 +143,41 @@ const NealphiPage = () => {
         p={[5, 10]}
         gap={10}
       >
-        <GridItem></GridItem>
+        <GridItem alignContent={"center"}>
+          <Text
+            fontFamily={"headings"}
+            fontSize={["28px", "44px"]}
+            color={"white"}
+            textAlign={"center"}
+          >
+            Discover the NEALPHI collection
+          </Text>
+          <Text
+            fontFamily={"headings"}
+            fontSize={["18px", "32px"]}
+            color={"white"}
+            textAlign={"center"}
+          >
+            where each pouch offers something special
+          </Text>
+
+          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
+            The fluffy pouch feels as cozy as a marshmallow, like snuggling up
+            to a soft rabbit, perfect for adding a gentle touch to your day.
+          </Text>
+
+          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
+            The puffy pouch stands out with its smooth, classy feel, ideal for
+            those who appreciate a bit of elegance.
+          </Text>
+          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
+            The transparent pouch is simple yet stylish, letting you see your
+            essentials while adding a hint of glamour.{" "}
+          </Text>
+          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
+            With such great options, picking just one might be the hardest part!
+          </Text>
+        </GridItem>
 
         <GridItem display={"flex"} justifyContent={"end"}>
           <Image transition={"all, linear, 0.1s"} src="../collection.jpeg" />

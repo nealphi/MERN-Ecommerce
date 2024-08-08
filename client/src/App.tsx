@@ -5,7 +5,7 @@ import AuthPage from "./pages/auth";
 import ShopPage from "./pages/shop";
 import CheckoutPage from "./pages/checkout";
 import { ShopContextProvider } from "./context/shop-contex";
-import PurchasedItemsPage from "./pages/purchased-items";
+import PurchasedItemsPage from "./pages/profile";
 import NealphiPage from "./pages/nealphi";
 
 function App() {
