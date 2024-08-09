@@ -24,10 +24,7 @@ const UserSchema = new Schema<IUser>({
     of: Number,
     default: {}
   },
-  profileImage:   {
-        data: Buffer,
-        contentType: String
-    }
+  profileImage: { type: String, default: "" }
 });
 
 

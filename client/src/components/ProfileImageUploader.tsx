@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { Box, Button, Image, Input, Text, IconButton, useToast } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
-import axios from 'axios';
-import { useGetToken } from '../hooks/useGetToken';
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Image,
+  Input,
+  Text,
+  IconButton,
+  useToast,
+} from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
+import axios from "axios";
+// import { useGetToken } from "../hooks/useGetToken";
 
 const ProfileImageUploader = () => {
-  const { headers } = useGetToken();
+  // const { headers } = useGetToken();
 
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -20,9 +28,8 @@ const ProfileImageUploader = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
-      console.log("image : ", file);
-
     }
+    console.log(file);
   };
 
   const handleImageDelete = () => {
@@ -32,56 +39,34 @@ const ProfileImageUploader = () => {
 
   const handleUpload = async () => {
     const api = "https://nealphi-ecommerce-server.vercel.app";
-    if (!image) {
-      toast({
-        title: 'No image selected',
-        description: 'Please select an image before uploading.',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
 
     const formData = new FormData();
-    formData.append('file', image);
+    formData.append("image", image);
 
-    try {
-      const response = await axios.post(`${api}/user/upload-profile-image`, formData, {
+    const response = await axios.post(
+      `${api}/user/upload-profile-image`,
+      formData,
+      {
         headers: {
-          ...headers, // Include the authorization header
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
-      });
-
-      toast({
-        title: 'Upload successful',
-        description: 'Your profile picture has been uploaded.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
-
-      // Handle response if needed
-      console.log(response.data);
-    } catch (error) {
-      toast({
-        title: 'Upload failed',
-        description: 'There was an error uploading your profile picture.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-      console.error('Upload error:', error);
-    }
+      }
+    );
+    console.log(response);
   };
 
   return (
-    <Box textAlign="center" p={4} borderWidth={1} borderRadius="md" boxShadow="md">
+    <Box
+      textAlign="center"
+      p={4}
+      borderWidth={1}
+      borderRadius="md"
+      boxShadow="md"
+    >
       <Text mb={4}>Upload your profile picture:</Text>
       <Input
         type="file"
-        accept="image/*"
+        accept="image/* "
         onChange={handleImageChange}
         mb={4}
         display="none"

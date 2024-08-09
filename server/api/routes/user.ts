@@ -9,7 +9,7 @@ import path from 'path';
 // Set up multer storage configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads');
+    cb(null, 'uploads/  ');
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
@@ -94,24 +94,10 @@ router.get("/available-money/:userID", verifyToken, async (req, res) => {
   }
 });
 
-router.post('/upload-profile-image', verifyToken, upload.single('file'), async (req, res) => {
-  try {
-    const userId = req.body.userId; // Get userId from request body
-    const file = req.file; // Get uploaded file
-
-    if (!userId || !file) {
-      return res.status(400).json({ error: 'User ID and file are required' });
-    }
-
-    const filePath = `/uploads/${file.filename}`; // Adjust path based on your setup
-
-    // Update user with the new profile image URL
-    await UserModel.findByIdAndUpdate(userId, { profileImage: filePath });
-
-    res.status(200).json({ message: 'Profile image uploaded successfully', filePath });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to upload profile image' });
-  }
+router.post('/upload-profile-image', upload.single('image'), async (req, res) => {
+console.log(req.body);
+res.send("uploaded")
 });
 
 export { router as userRouter };
+ 
