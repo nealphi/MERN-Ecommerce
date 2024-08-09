@@ -10,16 +10,24 @@ const ProfileImageUploader = () => {
 
   const handleUpload = (e) => {
     const formData = new FormData();
-    formData.append('file', file);
-  
+    formData.append("file", file);
+    console.log(file);
     const api = "https://nealphi-ecommerce-server.vercel.app";
     axios
-      .post(`${api}/upload`, formData)
-      .then(res => console.log('Upload successful:', res))
-      .catch(err => console.error('Upload failed:', err.response ? err.response.data : err.message));
+      .post(`${api}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => console.log("Upload successful:", res))
+      .catch((err) =>
+        console.error(
+          "Upload failed:",
+          err.response ? err.response.data : err.message
+        )
+      );
   };
-  
-    
+
   return (
     <div>
       <input type="file" onChange={handleImageChange} />
