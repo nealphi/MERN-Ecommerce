@@ -7,21 +7,21 @@ import multer from 'multer';
 import path from 'path';
 
 const router = express.Router();
-// Set up multer storage configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/Images/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.filename + " " + Date.now() + path.extname(file.originalname));
-  }
-});
+// // Set up multer storage configuration
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'public/Images/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.filename + " " + Date.now() + path.extname(file.originalname));
+//   }
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
-router.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.file)
-})
+// router.post('/upload', upload.single('file'), (req, res) => {
+//   console.log(req.file)
+// })
 
 
 

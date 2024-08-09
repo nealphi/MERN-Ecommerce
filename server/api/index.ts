@@ -24,6 +24,23 @@ app.options('*', cors());
 app.use(express.json());
 
 
+// Set up multer storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/Images/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.filename + " " + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  console.log(req.file)
+})
+
+
 app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.get('/hello', (req, res) => {

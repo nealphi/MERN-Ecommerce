@@ -13,7 +13,7 @@ const ProfileImageUploader = () => {
     formData.append('file', file)
     const api = "https://nealphi-ecommerce-server.vercel.app"
     axios
-    .post(`${api}/user/upload`, formData )
+    .post(`${api}/upload`, formData )
     .then(res => console.log(res))
     .catch(err => console.log(err));
   };
