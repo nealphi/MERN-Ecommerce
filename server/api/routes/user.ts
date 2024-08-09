@@ -9,7 +9,7 @@ import path from 'path';
 // Set up multer storage configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/  ');
+    cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
@@ -94,8 +94,9 @@ router.get("/available-money/:userID", verifyToken, async (req, res) => {
   }
 });
 
-router.post('/upload-profile-image', upload.single('image'), async (req, res) => {
-  const userID = localStorage.getItem("userID");
+router.post('/profile-image/:userID', upload.single('image'), async (req, res) => {
+  const { userID } = req.params;
+
   const fileName  = req.file.filename;
   try {
     const user = await UserModel.findById(userID);

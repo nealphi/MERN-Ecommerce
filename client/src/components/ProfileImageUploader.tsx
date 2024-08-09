@@ -41,11 +41,11 @@ const ProfileImageUploader = () => {
     const api = "https://nealphi-ecommerce-server.vercel.app";
 
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("file", image);
 
  
     const response = await axios.post(
-      `${api}/user/upload-profile-image`,
+      `${api}/user/profile-image/${localStorage.getItem("userID")}`,
       formData,
       {
         headers: {
