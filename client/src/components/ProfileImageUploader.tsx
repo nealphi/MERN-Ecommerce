@@ -42,7 +42,7 @@ const ProfileImageUploader = () => {
     formData.append('file', image);
 
     try {
-      const response = await axios.post(`${api}/userupload-profile-image`, formData, {
+      const response = await axios.post(`${api}/upload-profile-image`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
