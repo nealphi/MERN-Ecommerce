@@ -98,6 +98,7 @@ const NealphiPage = () => {
           alignContent={"center"}
           ref={topRef}
           className="fade-in"
+          color={'white'}
         >
           <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
             Hey Bag Lovers! Welcome to the NEALPHI's
@@ -121,7 +122,6 @@ const NealphiPage = () => {
       </Grid>
 
       <Grid
-
         backgroundColor={"beige"}
         templateColumns={{
           sm: "repeat(1, 1fr)",
@@ -132,18 +132,15 @@ const NealphiPage = () => {
         gap={[5, 10]}
         color={"black"}
       >
-        <GridItem textAlign={"center"} alignContent={"center"}>
-          <Text
-            fontFamily={"title"}
-            fontSize={["20px","34"]}
-            color={"white"}
-          >
+        <GridItem textAlign={"center"} alignContent={"center"} gap={5}>
+          <Text fontFamily={"title"} fontSize={["22px", "34"]} color={"black"}>
             Discover the NEALPHI collection
           </Text>
           <Text
             fontFamily={"title"}
-            fontSize={["16px","20px"]}
-            color={"white"}
+            fontSize={["14px", "20px"]}
+            color={"black"}
+            mb={5}
           >
             "where each pouch offers something special"
           </Text>
@@ -153,23 +150,32 @@ const NealphiPage = () => {
             fontFamily={"body"}
             textAlign={"justify"}
             fontSize={["14px", "18px"]}
+            backgroundColor={"lightBeige"}
+            borderTopLeftRadius={["50px","80px"]}
+            borderBottomRightRadius={["50px","80px"]}
           >
-            The fluffy pouch feels as smooth and airy as a marshmallow, like snuggling up
-            to a soft rabbit—perfect for adding a gentle, soothing touch to your
-            day, whether you’re stashing it in your beach bag filled with
-            cosmetics, skin care products, and other personal stuff for a summer
-            vacation. <br/> The puffy pouch, with its smooth, classy feel, is ideal
-            for keeping your essentials organized, bringing a touch of elegance
-            whether you're lounging by the pool or enjoying an evening out.<br/> The
-            transparent pouch is a must-have for summer—simple yet stylish, it
-            lets you see your sunscreen, lip balm, and other personal items at a
-            glance while adding a hint of glamour to your getaway.<br/> Each pouch in
-            the NEALPHI collection offers something unique, making them perfect
-            companions for all your summer adventures.
+            The fluffy pouch feels as smooth and airy as a marshmallow, like
+            snuggling up to a soft rabbit—perfect for adding a gentle, soothing
+            touch to your day, whether you’re stashing it in your beach bag
+            filled with cosmetics, skin care products, and other personal stuff
+            for a summer vacation.
+            <br />
+            <br />
+            The puffy pouch, with its smooth, classy feel, is ideal for keeping
+            your essentials organized, bringing a touch of elegance whether
+            you're lounging by the pool or enjoying an evening out.
+            <br />
+            <br />
+            The transparent pouch is a must-have for summer—simple yet
+            stylish, it lets you see your sunscreen, lip balm, and other
+            personal items at a glance while adding a hint of glamour to your
+            getaway.
+            <br /> Each pouch in the NEALPHI collection offers something unique,
+            making them perfect companions for all your summer adventures.
           </Text>
         </GridItem>
 
-        <GridItem>
+        <GridItem >
           <Image
             src="../collection.jpeg"
             ref={collectionRef}
