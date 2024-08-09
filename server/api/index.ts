@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import { userRouter } from './routes/user';
 import { productRouter } from './routes/product';
 import path from 'path';
+import multer from 'multer';
+
 const cors = require('cors');
 
 const app = express();

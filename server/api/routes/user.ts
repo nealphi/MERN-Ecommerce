@@ -6,22 +6,23 @@ import { UserErrors } from '../errors';
 import multer from 'multer';
 import path from 'path';
 
+const router = express.Router();
 // Set up multer storage configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, 'public/Images/');
   },
   filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const filename = Date.now() + ext;
-    cb(null, filename);
+    cb(null, file.filename + " " + Date.now() + path.extname(file.originalname));
   }
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
+router.post('/upload', (req, res) => {
+  console.log(req.file)
+})
 
-const router = express.Router();
 
 
 
