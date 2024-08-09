@@ -94,24 +94,5 @@ router.get("/available-money/:userID", verifyToken, async (req, res) => {
   }
 });
 
-router.post('/profile-image/:userID', upload.single('image'), async (req, res) => {
-  const { userID } = req.params;
-
-  const fileName  = req.file.filename;
-  try {
-    const user = await UserModel.findById(userID);
-    user.profileImage = fileName;
-    if (user) {
-      await user.save();
-      res.status(200).json({ success: true, profileImage: fileName });
-    } else {
-      res.status(404).json({ success: false, message: "User not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
-
-
 export { router as userRouter };
  
