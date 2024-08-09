@@ -8,6 +8,7 @@ export interface IUser {
   availableMoney: number;
   purchasedItems: string[];
   cartItems: { [key: string]: number };  
+  profileImage?: string; 
 }
 
 const UserSchema = new Schema<IUser>({
@@ -22,7 +23,8 @@ const UserSchema = new Schema<IUser>({
     type: Map,
     of: Number,
     default: {}
-  }
+  },
+  profileImage: { type: String, default: "" }
 });
 
 

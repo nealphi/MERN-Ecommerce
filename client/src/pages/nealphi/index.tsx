@@ -8,7 +8,7 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
 import VideoComponent from "../../components/Video";
@@ -140,7 +140,7 @@ const NealphiPage = () => {
             fontFamily={"title"}
             fontSize={["14px", "20px"]}
             color={"black"}
-            mb={5}
+            mb={10}
           >
             "where each pouch offers something special"
           </Text>
@@ -151,8 +151,7 @@ const NealphiPage = () => {
             textAlign={"justify"}
             fontSize={["14px", "18px"]}
             backgroundColor={"lightBeige"}
-            borderTopLeftRadius={["50px","80px"]}
-            borderBottomRightRadius={["50px","80px"]}
+            borderRadius={["30px","50px"]}
           >
             The fluffy pouch feels as smooth and airy as a marshmallow, like
             snuggling up to a soft rabbit—perfect for adding a gentle, soothing

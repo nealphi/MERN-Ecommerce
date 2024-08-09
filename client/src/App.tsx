@@ -5,8 +5,8 @@ import AuthPage from "./pages/auth";
 import ShopPage from "./pages/shop";
 import CheckoutPage from "./pages/checkout";
 import { ShopContextProvider } from "./context/shop-contex";
-import PurchasedItemsPage from "./pages/profile";
 import NealphiPage from "./pages/nealphi";
+import AccountPage from "./pages/account";
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/purchased-items"  element={<PurchasedItemsPage/>} />
+            <Route path="/account"  element={<AccountPage/>} />
           </Routes>
         </ShopContextProvider>
       </Router>

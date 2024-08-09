@@ -44,7 +44,6 @@ const Register = ({ isVisible, setIsVisible }) => {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
-  let navigate = useNavigate();
 
   const handleShowClick = () => setShowPassword(!showPassword);
 

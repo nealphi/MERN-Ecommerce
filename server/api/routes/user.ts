@@ -3,8 +3,13 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { IUser, UserModel } from "../models/user";
 import { UserErrors } from "../errors";
+import multer from 'multer';
+const upload = multer({ dest: 'uploads/' }); // Folder to store uploaded files
+
 
 const router = express.Router();
+
+
 
 router.post("/register", async (req, res) => {
   const { email, username, password } = req.body;
@@ -75,6 +80,26 @@ router.get("/available-money/:userID", verifyToken, async (req, res) => {
   }
 });
 
+// Endpoint to handle profile image upload
+router.post("/upload-profile-image", verifyToken, upload.single('file'), async (req, res) => {
+  try {
+    const userId = req.body.userId; // Get userId from request body
+    const file = req.file; // Get uploaded file
+
+    if (!userId || !file) {
+      return res.status(400).json({ error: 'User ID and file are required' });
+    }
+
+    const filePath = `/uploads/${file.filename}`; // Adjust path based on your setup
+
+    // Update user with the new profile image URL
+    await UserModel.findByIdAndUpdate(userId, { profileImage: filePath });
+
+    res.status(200).json({ message: 'Profile image uploaded successfully', filePath });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to upload profile image' });
+  }
+});
 
 
 export { router as userRouter };
