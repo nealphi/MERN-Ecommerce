@@ -17,7 +17,7 @@ const ProfileImageUploader = () => {
 
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const toast = useToast();
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -43,6 +43,7 @@ const ProfileImageUploader = () => {
     const formData = new FormData();
     formData.append("image", image);
 
+ 
     const response = await axios.post(
       `${api}/user/upload-profile-image`,
       formData,
@@ -52,7 +53,7 @@ const ProfileImageUploader = () => {
         },
       }
     );
-    console.log(response);
+    console.log(response);  
   };
 
   return (
