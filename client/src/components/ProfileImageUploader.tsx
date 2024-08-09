@@ -20,6 +20,8 @@ const ProfileImageUploader = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
+      console.log("image : ", file);
+
     }
   };
 
