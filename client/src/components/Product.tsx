@@ -37,13 +37,14 @@ const Product = (props: Props) => {
   return (
     <>
       <Card maxW="sm" m={3}>
-        <CardBody>
+        <CardBody >
           <Image
             onClick={onOpen}
-            cursor={"pointer"}
+            cursor={"zoom-in"}
             src={imageURL}
             alt={productName}
             borderRadius="lg"
+            
           />
           <Stack mt="6" spacing="3">
             <Text fontSize={["16px", "20px"]} as={"b"}>
@@ -76,11 +77,9 @@ const Product = (props: Props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{productName}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          <ImageMagnifier src={imageURL} zoomLevel={3}/>
-            <Text mt={4}>{description}</Text>
+            <ImageMagnifier src={imageURL} zoomLevel={3} />
           </ModalBody>
         </ModalContent>
       </Modal>

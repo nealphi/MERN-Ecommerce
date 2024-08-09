@@ -39,8 +39,15 @@ export const Navbar = () => {
   }, [selectedTab]);
 
   return (
-    <Flex className="navbar">
-      <Link _hover={{ textDecoration: "none" }} onClick={() => setSelectedTab("top")} href="/" fontSize={"24px"}>
+    <Flex className="navbar" px={[5, 10]}>
+      <Link
+        _hover={{ textDecoration: "none" }}
+        onClick={() => setSelectedTab("top")}
+        href="/"
+        fontSize={"24px"}
+        fontFamily={"nealphi"}
+        letterSpacing={"10px"}
+      >
         NEALPHI
       </Link>
       <Flex gap={5}>
@@ -58,18 +65,22 @@ export const Navbar = () => {
           <Menu>
             <MenuButton>
               <Link>
-                <Icon boxSize={5} as={FaUser} mr={1} /> Hello {username}
+                <Icon boxSize={5} as={FaUser} mr={1} />
               </Link>
             </MenuButton>
             <MenuList>
               <MenuGroup>
-              <Link href="/checkout"  _hover={{ textDecoration: "none" }} >
+               <Link href="/account" _hover={{ textDecoration: "none" }}>
+               <MenuItem>
+                  <Text>{username}'s Account</Text>{" "}
+                </MenuItem></Link>
+                <Link href="/checkout" _hover={{ textDecoration: "none" }}>
                   <MenuItem justifyContent={"space-between"}>
-                  <Text>
-                    {count} {count > 1 ? "items" : "item"} in Cart
-                  </Text>
+                    <Text>
+                      {count} {count > 1 ? "items" : "item"} in Cart
+                    </Text>
 
-                  <Icon boxSize={6} as={FaCartShopping} />
+                    <Icon boxSize={6} as={FaCartShopping} />
                   </MenuItem>
                 </Link>
                 <MenuItem justifyContent={"space-between"}>
@@ -79,7 +90,11 @@ export const Navbar = () => {
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <Link href="/" onClick={logout} _hover={{ textDecoration: "none" }} >
+                <Link
+                  href="/"
+                  onClick={logout}
+                  _hover={{ textDecoration: "none" }}
+                >
                   <MenuItem justifyContent={"space-between"}>
                     Logout
                     <Icon boxSize={5} as={FaArrowRightFromBracket} />
@@ -90,7 +105,11 @@ export const Navbar = () => {
           </Menu>
         )}
 
-        {!isAuthenticated && <Link href="/auth">Login</Link>}
+        {!isAuthenticated && (
+          <Link href="/auth" _hover={{ textDecoration: "none" }}>
+            Login
+          </Link>
+        )}
       </Flex>
     </Flex>
   );

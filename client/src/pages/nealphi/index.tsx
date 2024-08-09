@@ -13,31 +13,13 @@ import { IShopContext, ShopContext } from "../../context/shop-contex";
 import { useNavigate } from "react-router-dom";
 import VideoComponent from "../../components/Video";
 import { ContactUs } from "../../components/ContactUs";
-import YoutubeEmbed from "../../components/YoutubeEmbed";
 
 const NealphiPage = () => {
-  // const YouTubeVideos = [
-  //   {
-  //     embedId: "pa0n47LARZE?si=CKk-TbWzq8L9hVHu",
-  //     description: "Transparent Tote Bag Tutorial (English)",
-  //   },
-  //   {
-  //     embedId: "llsFdu0aQ0w?si=QEJvnc98bcMCL6Uz",
-  //     description: "Clear Zippered Boxy Pouch Tutorial (English)",
-  //   },
-  //   {
-  //     embedId: "a4CPYPGOZ5Q?si=VgLJSzN7UiLyJkaF",
-  //     description: "Transparent Beauty Pouch Tutorial (English)",
-  //   },
-  //   {
-  //     embedId: "spwS0XQpS2g?si=BMTIbaAqpUm_L7Z3",
-  //     description: "Clear Zippered Boxy Pouch Tutorial (Persian)",
-  //   },
-  //   {
-  //     embedId: "SQlI8GHD4lI?si=QRbawvKnQOqHTDWO",
-  //     description: "Mini Clear Pouch Tutorial (Persian) ",
-  //   },
-  // ];
+  const topRef = useRef(null);
+  const collectionRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
+
   const imageSrc = [
     { src: "../1.jpeg", url: "/p/CV7wLvUopaZ/" },
     { src: "../2.jpeg", url: "/p/Cry06NBIH7z/" },
@@ -55,38 +37,43 @@ const NealphiPage = () => {
       "noopener,noreferrer"
     );
   };
-  const { selectedTab, setSelectedTab, isAuthenticated } =
-    useContext<IShopContext>(ShopContext);
-  const topRef = useRef(null);
-  const tutorialsRef = useRef(null);
+  const { isAuthenticated } = useContext<IShopContext>(ShopContext);
+
   let navigate = useNavigate();
   const redirect = () => {
     isAuthenticated ? navigate("/shop") : navigate("/auth");
   };
-  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    const refs = [topRef, collectionRef, aboutRef, contactRef];
 
-  useEffect(() => {
-    const scrollToRef = (ref) => {
-      if (ref && ref.current) {
-        window.scrollTo({
-          top: ref.current.offsetTop,
-          behavior: "smooth",
-        });
-      }
+    const handleIntersection = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        } else {
+          entry.target.classList.remove("visible");
+        }
+      });
     };
 
-    if (selectedTab === "tutorials") {
-      scrollToRef(tutorialsRef);
-    }
-    return setSelectedTab(" ");
-  }, [selectedTab]);
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+    });
 
-  useEffect(() => {
-    window.scrollTo({ top: 10, behavior: "smooth" });
+    refs.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => {
+      refs.forEach((ref) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
+    };
   }, []);
 
   return (
@@ -101,15 +88,16 @@ const NealphiPage = () => {
         p={[0, 10]}
         gap={[5, 10]}
       >
-        <GridItem ref={topRef}>
+        <GridItem>
           <VideoComponent />
         </GridItem>
         <GridItem
-          className={`intro ${isVisible ? "fade-in" : ""}`}
           h={"100%"}
           minH={"200px"}
           textAlign={"center"}
           alignContent={"center"}
+          ref={topRef}
+          className="fade-in"
         >
           <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
             Hey Bag Lovers! Welcome to the NEALPHI's
@@ -126,7 +114,6 @@ const NealphiPage = () => {
             backgroundColor={"lightGreen"}
             color={"white"}
             _hover={{ backgroundColor: "darkGreen" }}
-            transition={"all, linear, 0.1s"}
           >
             SHOP NEALPHI
           </Button>
@@ -134,53 +121,60 @@ const NealphiPage = () => {
       </Grid>
 
       <Grid
+
         backgroundColor={"beige"}
         templateColumns={{
           sm: "repeat(1, 1fr)",
-          md: "repeat(2, 1fr)",
+          md: "repeat(1, 1fr)",
           lg: "repeat(2, 1fr)",
         }}
         p={[5, 10]}
-        gap={10}
+        gap={[5, 10]}
+        color={"black"}
       >
-        <GridItem alignContent={"center"}>
+        <GridItem textAlign={"center"} alignContent={"center"}>
           <Text
-            fontFamily={"headings"}
-            fontSize={["28px", "44px"]}
+            fontFamily={"title"}
+            fontSize={["20px","34"]}
             color={"white"}
-            textAlign={"center"}
           >
             Discover the NEALPHI collection
           </Text>
           <Text
-            fontFamily={"headings"}
-            fontSize={["18px", "32px"]}
+            fontFamily={"title"}
+            fontSize={["16px","20px"]}
             color={"white"}
-            textAlign={"center"}
           >
-            where each pouch offers something special
+            "where each pouch offers something special"
           </Text>
 
-          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
-            The fluffy pouch feels as cozy as a marshmallow, like snuggling up
-            to a soft rabbit, perfect for adding a gentle touch to your day.
-          </Text>
-
-          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
-            The puffy pouch stands out with its smooth, classy feel, ideal for
-            those who appreciate a bit of elegance.
-          </Text>
-          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
-            The transparent pouch is simple yet stylish, letting you see your
-            essentials while adding a hint of glamour.{" "}
-          </Text>
-          <Text fontFamily={"body"} fontSize={["14px", "16px", "20px"]}>
-            With such great options, picking just one might be the hardest part!
+          <Text
+            p={[5, 10]}
+            fontFamily={"body"}
+            textAlign={"justify"}
+            fontSize={["14px", "18px"]}
+          >
+            The fluffy pouch feels as smooth and airy as a marshmallow, like snuggling up
+            to a soft rabbit—perfect for adding a gentle, soothing touch to your
+            day, whether you’re stashing it in your beach bag filled with
+            cosmetics, skin care products, and other personal stuff for a summer
+            vacation. <br/> The puffy pouch, with its smooth, classy feel, is ideal
+            for keeping your essentials organized, bringing a touch of elegance
+            whether you're lounging by the pool or enjoying an evening out.<br/> The
+            transparent pouch is a must-have for summer—simple yet stylish, it
+            lets you see your sunscreen, lip balm, and other personal items at a
+            glance while adding a hint of glamour to your getaway.<br/> Each pouch in
+            the NEALPHI collection offers something unique, making them perfect
+            companions for all your summer adventures.
           </Text>
         </GridItem>
 
-        <GridItem display={"flex"} justifyContent={"end"}>
-          <Image transition={"all, linear, 0.1s"} src="../collection.jpeg" />
+        <GridItem>
+          <Image
+            src="../collection.jpeg"
+            ref={collectionRef}
+            className="fade-in"
+          />
         </GridItem>
       </Grid>
       <Grid
@@ -195,28 +189,20 @@ const NealphiPage = () => {
       >
         <GridItem>
           <Image
+            ref={aboutRef}
             className="fade-in"
-            transition={"all, 0.1s"}
             src="../neginpanahi3.jpeg"
           />
-          {/* <Flex
-            // filter="grayscale(100%)"
-            // _hover={{ filter: "grayscale(0%)" }}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            p={5}
-          >
-            {YouTubeVideos.map((video) => (
-              <YoutubeEmbed embedId={video.embedId} />
-            ))}
-          </Flex> */}
         </GridItem>
         <GridItem
           display={"flex"}
+          justifyContent={"space-between"}
           flexDirection={"column"}
           textAlign={"justify"}
+          color={"black"}
+          fontSize={["14px", "18px"]}
         >
-          <Text fontSize={["14px", "16px"]}>
+          <Text>
             After graduating from the Art University of Tehran in 2020, Negin
             Alphi started her business, NEALPHI, by turning an old garage into
             her workspace. NEALPHI offers handmade products, each showing
@@ -224,23 +210,26 @@ const NealphiPage = () => {
             and craftsmanship helped NEALPHI quickly gain recognition and a
             loyal customer base.
           </Text>
-          <Text fontSize={["14px", "16"]}>
+          <Text>
             NEALPHI's story is not just about high quality handmade items but
             also about the strength and power of women. It highlights the
             success of a business run entirely by women and demonstrates how
             female entrepreneurship can transform simple beginnings into
             thriving ventures.
           </Text>
-          <Text fontSize={["14px", "14px", "16"]}>
+          <Text>
             Aligned with her dedication to women empowerment, Negin also
-            publishes free tutorials on NEALPHI's YouTube channel and runs
-            workshops to help other women start their own businesses. She
-            believes in sharing her knowledge and skills to support and inspire
-            other women to pursue their entrepreneurial dreams.
+            publishes free tutorials on NEALPHI's{" "}
+            <Link color={"darkGreen"} href="https://www.youtube.com/@NEALPHI">
+              YouTube channel
+            </Link>{" "}
+            and runs workshops to help other women start their own businesses.
+            She believes in sharing her knowledge and skills to support and
+            inspire other women to pursue their entrepreneurial dreams.
           </Text>
         </GridItem>
       </Grid>
-      <Box backgroundColor={"lightBeige"} p={[5, 10]} ref={tutorialsRef}>
+      <Box backgroundColor={"lightBeige"} p={[5, 10]}>
         <Grid
           templateColumns={{
             base: "repeat(2, 1fr)",
@@ -264,7 +253,7 @@ const NealphiPage = () => {
         >
           <Text
             textAlign={"center"}
-            fontFamily={"headings"}
+            fontFamily={"body"}
             fontSize={{ sm: "18px", md: "24px" }}
             color={"mocha"}
           >
@@ -273,9 +262,23 @@ const NealphiPage = () => {
           </Text>
         </Flex>
       </Box>
-      <ContactUs />
+      <Flex ref={contactRef}>
+        <ContactUs />
+      </Flex>
     </Box>
   );
 };
 
 export default NealphiPage;
+
+/* <Flex
+            // filter="grayscale(100%)"
+            // _hover={{ filter: "grayscale(0%)" }}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            p={5}
+          >
+            {YouTubeVideos.map((video) => (
+              <YoutubeEmbed embedId={video.embedId} />
+            ))}
+          </Flex> */

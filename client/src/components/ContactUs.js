@@ -39,17 +39,21 @@ export const ContactUs = () => {
       justifyContent={"center"}
       alignItems={"center"}
       bgColor={"white"}
-      p={[5, 10]}
-      h={'80vh'}
-      >
+      p={[5, 20]}
+    >
       <Text fontSize={["26px", "32", "38px"]} color={"lightGreen"} mb={10}>
         Contact Us
       </Text>
       <form ref={form} onSubmit={sendEmail}>
-        <Flex flexDirection={["column", "row"]} gap={5} my={5}>
+        <Flex flexDirection={["column", "row"]} gap={5} my={5} color={'black'}>
           <FormControl isRequired>
             <FormLabel>Full Name</FormLabel>
-            <Input type="text" name="user_name" />
+            <Input
+              type="text"
+              name="user_name"
+              focusBorderColor="darkGreen"
+              borderColor="lightGreen"
+            />
           </FormControl>
 
           <FormControl isRequired>
@@ -65,6 +69,8 @@ export const ContactUs = () => {
             height={"200px"}
             color={"teal.500"}
             _placeholder={{ color: "teal.500" }}
+            border={"1px solid"}
+            _hover={{borderColor:"lightGreen"}}
           />
           <Button
             className="submit"
@@ -72,7 +78,9 @@ export const ContactUs = () => {
             color={"white"}
             bgColor={"lightGreen"}
             _hover={{ backgroundColor: "darkGreen" }}
-          >Send</Button>
+          >
+            Send
+          </Button>
         </Flex>
       </form>
     </Flex>

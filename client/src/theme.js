@@ -1,5 +1,8 @@
 import { extendTheme } from "@chakra-ui/react";
 import '@fontsource-variable/cinzel';
+import '@fontsource/tenor-sans';
+import '@fontsource/almarai';
+import '@fontsource-variable/quicksand';
 import { inputTheme } from "./components/input";
 import { menuTheme } from "./components/menu";
 import { cardTheme } from "./components/card";
@@ -16,7 +19,8 @@ const theme = extendTheme({
   components: { Input: inputTheme, Menu: menuTheme, Card: cardTheme,  Modal: modalTheme },
   fonts: {
     heading: 'Cinzel Variable',
-    body: `'Raleway', sans-serif`,
+    body: 'Quicksand Variable',
+    nealphi: 'Almarai',
 
   },
   colors: {

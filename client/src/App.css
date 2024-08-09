@@ -18,17 +18,35 @@ input:-webkit-autofill{
   -webkit-text-fill-color: rgb(92, 139, 138) !important;
 }
 
-.intro {
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.5s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* .intro {
   color: white;
   opacity: 0;
   transform: translateY(40px);
   transition: all 1s ease-out;
 }
 
-.intro.fade-in {
+.collection {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 5s ease-out;
+}
+
+.fade-in {
   opacity: 1;
   transform: translateY(0);
-}
+} */
 
 .App {
  display: flex;

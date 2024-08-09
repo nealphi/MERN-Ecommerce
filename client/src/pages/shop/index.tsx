@@ -26,7 +26,6 @@ const ShopPage = () => {
           md: "repeat(3, 1fr)",
           lg: "repeat(4, 1fr)",
         }}
-        className={`intro ${isVisible ? "fade-in" : ""}`}
       >
         {products.map((product) => (
           <GridItem key={product.productName}>
