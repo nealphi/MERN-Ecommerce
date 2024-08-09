@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { userRouter } from './routes/user';
 import { productRouter } from './routes/product';
+import path from 'path';
 const cors = require('cors');
 
 const app = express();
@@ -18,6 +19,8 @@ app.use(cors({
 app.options('*', cors());
 
 app.use(express.json());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files
 
 app.use('/user', userRouter);
 app.use('/product', productRouter);
