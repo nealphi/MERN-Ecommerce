@@ -20,6 +20,7 @@ app.use(cors({
 app.options('*', cors());
 
 app.use(express.json());
+
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files
 

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Box, Button, Image, Input, Text, IconButton, useToast } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import axios from 'axios';
+import { useGetToken } from '../hooks/useGetToken';
 
 const ProfileImageUploader = () => {
+  const { headers } = useGetToken();
+
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const toast = useToast();
@@ -42,8 +45,9 @@ const ProfileImageUploader = () => {
     formData.append('file', image);
 
     try {
-      const response = await axios.post(`${api}/upload-profile-image`, formData, {
+      const response = await axios.post(`${api}/user/upload-profile-image`, formData, {
         headers: {
+          ...headers, // Include the authorization header
           'Content-Type': 'multipart/form-data',
         },
       });

@@ -114,5 +114,4 @@ router.post('/upload-profile-image', verifyToken, upload.single('file'), async (
   }
 });
 
-
 export { router as userRouter };
