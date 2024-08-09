@@ -1,10 +1,24 @@
-import express from "express";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import { IUser, UserModel } from "../models/user";
-import { UserErrors } from "../errors";
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import { IUser, UserModel } from '../models/user';
+import { UserErrors } from '../errors';
 import multer from 'multer';
-const upload = multer({ dest: 'uploads/' }); // Folder to store uploaded files
+import path from 'path';
+
+// Set up multer storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const filename = Date.now() + ext;
+    cb(null, filename);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 
 const router = express.Router();
@@ -80,8 +94,7 @@ router.get("/available-money/:userID", verifyToken, async (req, res) => {
   }
 });
 
-// Endpoint to handle profile image upload
-router.post("/upload-profile-image", verifyToken, upload.single('file'), async (req, res) => {
+router.post('/upload-profile-image', verifyToken, upload.single('file'), async (req, res) => {
   try {
     const userId = req.body.userId; // Get userId from request body
     const file = req.file; // Get uploaded file

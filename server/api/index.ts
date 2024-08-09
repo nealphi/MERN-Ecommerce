@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const app = express();
 
+
 // Use CORS middleware
 app.use(cors({
   // origin: 'https://mern-ecommerce-client-ecru.vercel.app',
@@ -20,7 +21,7 @@ app.options('*', cors());
 
 app.use(express.json());
 
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files
 
 app.use('/user', userRouter);
 app.use('/product', productRouter);
