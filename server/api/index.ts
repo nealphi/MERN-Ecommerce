@@ -24,25 +24,33 @@ app.options('*', cors());
 app.use(express.json());
 
 
-// Set up multer storage configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.resolve(__dirname, 'public/Images'));
+    const dir = path.resolve(__dirname, 'public/Images');
+    cb(null, dir);
   },
   filename: (req, file, cb) => {
     cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
   }
 });
 
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit, adjust as needed
+});
 
-const upload = multer({ storage: storage });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  if (req.file) {
-    console.log(req.file);
+app.post('/upload', upload.single('file'),async (req, res) => {
+  try {
+    if (!req.file) {
+      console.error('No file uploaded.');
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+    console.log('File upload successful:', req.file);
     res.status(200).json({ message: 'File uploaded successfully', file: req.file });
-  } else {
-    res.status(400).json({ message: 'File upload failed' });
+  } catch (error) {
+    console.error('Error during file upload:', error);
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
   }
 });
 
